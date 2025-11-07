@@ -2,7 +2,7 @@ export const mockUsers = [
   {
     id: '1',
     username: 'admin',
-    email: 'admin@mlmlab.com',
+    email: 'admin@globerise.com',
     password: 'admin123',
     role: 'admin',
     name: 'Admin User',

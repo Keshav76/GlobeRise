@@ -91,5 +91,6 @@ export const STORAGE_KEYS = {
   PLANS: 'plans',
   PINS: 'pins',
   TRANSACTIONS: 'transactions',
+  RANKINGS: 'rankings',
 };
 

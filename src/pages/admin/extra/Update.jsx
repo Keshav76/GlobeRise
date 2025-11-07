@@ -8,7 +8,7 @@ const Update = () => {
       <Card>
         <div className="space-y-4">
           <p className="text-gray-600">System update information.</p>
-          <p className="text-sm text-gray-500">Current Version: MLMLAB V3.1</p>
+          <p className="text-sm text-gray-500">Current Version: GlobeRise V1.0</p>
           <Button variant="primary">Check for Updates</Button>
         </div>
       </Card>

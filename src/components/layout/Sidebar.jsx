@@ -149,7 +149,7 @@ const Sidebar = () => {
           <div className="w-10 h-10 bg-[#00d4ff] rounded-lg flex items-center justify-center">
             <FaUsers className="text-xl text-[#0d1421]" />
           </div>
-          <h1 className="text-xl font-bold text-white">MLMLab</h1>
+          <h1 className="text-xl font-bold text-white">GlobeRise</h1>
         </div>
 
         <nav className="space-y-1 -mx-6">
