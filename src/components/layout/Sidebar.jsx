@@ -140,8 +140,11 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="w-64 bg-[#1a1f2e] text-white h-screen fixed left-0 top-0 overflow-y-auto border-r border-[#374151]">
-      <div className="p-6">
+    <div
+      className="w-64 text-white h-screen fixed left-0 top-0 overflow-y-auto sidebar-scrollbar"
+      style={{ backgroundColor: '#071251', borderRight: '1px solid rgba(255,255,255,0.1)' }}
+    >
+      <div className="p-6 flex flex-col h-full">
         <div className="flex items-center space-x-2 mb-8">
           <div className="w-10 h-10 bg-[#00d4ff] rounded-lg flex items-center justify-center">
             <FaUsers className="text-xl text-[#0d1421]" />
@@ -149,7 +152,7 @@ const Sidebar = () => {
           <h1 className="text-xl font-bold text-white">MLMLab</h1>
         </div>
 
-        <nav className="space-y-1">
+        <nav className="space-y-1 -mx-6">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const hasSubmenu = item.submenu && item.submenu.length > 0;
@@ -160,7 +163,7 @@ const Sidebar = () => {
                 <div key={item.label}>
                   <button
                     onClick={() => toggleMenu(item.menuKey)}
-                    className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg hover:bg-[#252a3a] transition-colors text-gray-300 hover:text-white"
+                    className="w-full flex items-center justify-between px-6 py-3 text-sm font-medium hover:bg-blue-800 hover:bg-opacity-10 transition-colors text-gray-300 hover:text-white"
                   >
                     <div className="flex items-center space-x-3">
                       <Icon />
@@ -176,27 +179,28 @@ const Sidebar = () => {
                     </div>
                   </button>
 
-                  {isOpen && (
-                    <div className="ml-4 mt-1 space-y-1">
-                      {item.submenu.map((subItem) => (
-                        <NavLink
-                          key={subItem.label}
-                          to={subItem.path}
-                          className={({ isActive }) =>
-                            `flex items-center justify-between px-4 py-2 text-sm rounded-lg hover:bg-[#252a3a] transition-colors text-gray-400 hover:text-white ${isActive ? 'bg-[#252a3a] text-[#00d4ff]' : ''
-                            }`
-                          }
-                        >
-                          <span>{subItem.label}</span>
-                          {subItem.badge && (
-                            <span className="bg-[#f59e0b] text-white text-xs px-2 py-0.5 rounded-full">
-                              {subItem.badge}
-                            </span>
-                          )}
-                        </NavLink>
-                      ))}
-                    </div>
-                  )}
+                  <div
+                    className={`mt-1 space-y-1 overflow-hidden sidebar-submenu ${isOpen ? 'open' : 'closed'
+                      }`}
+                  >
+                    {item.submenu.map((subItem) => (
+                      <NavLink
+                        key={subItem.label}
+                        to={subItem.path}
+                        className={({ isActive }) =>
+                          `flex items-center justify-between px-6 py-2 text-sm hover:bg-blue-800 hover:bg-opacity-10 transition-colors text-gray-400 hover:text-white ${isActive ? 'bg-blue-600 text-white' : ''
+                          }`
+                        }
+                      >
+                        <span>{subItem.label}</span>
+                        {subItem.badge && (
+                          <span className="bg-[#f59e0b] text-white text-xs px-2 py-0.5 rounded-full">
+                            {subItem.badge}
+                          </span>
+                        )}
+                      </NavLink>
+                    ))}
+                  </div>
                 </div>
               );
             }
@@ -206,7 +210,9 @@ const Sidebar = () => {
                 key={item.label}
                 to={item.path}
                 className={({ isActive }) =>
-                  `flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg hover:bg-[#252a3a] transition-colors text-gray-300 hover:text-white ${isActive ? 'bg-[#252a3a] text-[#00d4ff]' : ''
+                  `flex items-center justify-between px-6 py-3 text-sm font-medium transition-colors ${isActive
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-300 hover:text-white hover:bg-blue-800 hover:bg-opacity-10'
                   }`
                 }
               >

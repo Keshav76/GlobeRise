@@ -7,19 +7,19 @@
   --color-dark-bg-tertiary: #252a3a;
   --color-dark-border: #374151;
   --color-dark-border-light: #4b5563;
-  
+
   /* Text Colors */
   --color-text-primary: #ffffff;
   --color-text-secondary: #e5e7eb;
   --color-text-tertiary: #9ca3af;
-  
+
   /* Accent Colors */
   --color-primary: #00d4ff;
   --color-primary-dark: #3b82f6;
   --color-success: #10b981;
   --color-danger: #ef4444;
   --color-warning: #f59e0b;
-  
+
   /* Sidebar */
   --color-sidebar: #1a1f2e;
 }
@@ -27,4 +27,48 @@
 body {
   background-color: var(--color-dark-bg);
   color: var(--color-text-primary);
+}
+
+/* Custom Sidebar Scrollbar */
+.sidebar-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #0a1647 #071251;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-track {
+  background: #071251;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #0a1647;
+  border-radius: 3px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #050f3a;
+}
+
+/* Sidebar Submenu Animation */
+.sidebar-submenu {
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s ease-in-out,
+    padding-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    padding-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-submenu.closed {
+  max-height: 0 !important;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+}
+
+.sidebar-submenu.open {
+  max-height: 1000px;
+  opacity: 1;
 }

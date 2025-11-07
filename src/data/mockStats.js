@@ -5,7 +5,7 @@ export const mockStats = {
   mobileUnverifiedUsers: 1,
   kycUnverifiedUsers: 878,
   kycPendingUsers: 117,
-  totalDeposited: 227651.95,
+  totalDeposited: 227753.95,
   pendingDeposits: 301,
   rejectedDeposits: 0,
   depositedCharge: 1800.53,
@@ -17,5 +17,61 @@ export const mockStats = {
   last7DaysInvest: 0.00,
   totalReferralCommission: 11995.00,
   totalBinaryCommission: 2002.62,
+  usersTotalBvCut: 0,
+  usersTotalBV: 202560,
+  usersLeftBV: 173420,
+  usersRightBV: 29140,
+  // Chart data for deposits and withdrawals
+  depositWithdrawData: [
+    { date: '24-Oct-2025', deposited: 0, withdrawn: 0 },
+    { date: '25-Oct-2025', deposited: 0, withdrawn: 0 },
+    { date: '26-Oct-2025', deposited: 0, withdrawn: 0 },
+    { date: '27-Oct-2025', deposited: 0, withdrawn: 95 },
+    { date: '28-Oct-2025', deposited: 95, withdrawn: 95 },
+    { date: '29-Oct-2025', deposited: 0, withdrawn: 0 },
+    { date: '30-Oct-2025', deposited: 0, withdrawn: 0 },
+    { date: '31-Oct-2025', deposited: 0, withdrawn: 95 },
+    { date: '01-Nov-2025', deposited: 5, withdrawn: 0 },
+    { date: '02-Nov-2025', deposited: 0, withdrawn: 95 },
+    { date: '03-Nov-2025', deposited: 95, withdrawn: 95 },
+    { date: '04-Nov-2025', deposited: 0, withdrawn: 0 },
+    { date: '05-Nov-2025', deposited: 0, withdrawn: 95 },
+    { date: '06-Nov-2025', deposited: 95, withdrawn: 0 },
+    { date: '07-Nov-2025', deposited: 0, withdrawn: 0 },
+  ],
+  // Transaction data (plus and minus)
+  transactionData: [
+    { date: '25-Oct-2025', plus: 0, minus: 0 },
+    { date: '26-Oct-2025', plus: 0, minus: 0 },
+    { date: '27-Oct-2025', plus: 0, minus: 95 },
+    { date: '28-Oct-2025', plus: 95, minus: 95 },
+    { date: '29-Oct-2025', plus: 0, minus: 0 },
+    { date: '30-Oct-2025', plus: 0, minus: 0 },
+    { date: '31-Oct-2025', plus: 0, minus: 95 },
+    { date: '01-Nov-2025', plus: 5, minus: 0 },
+    { date: '02-Nov-2025', plus: 0, minus: 95 },
+    { date: '03-Nov-2025', plus: 95, minus: 95 },
+    { date: '04-Nov-2025', plus: 0, minus: 0 },
+    { date: '05-Nov-2025', plus: 0, minus: 95 },
+    { date: '06-Nov-2025', plus: 95, minus: 0 },
+    { date: '07-Nov-2025', plus: 0, minus: 0 },
+  ],
+  // Login by browser data
+  loginByBrowser: [
+    { name: 'Chrome', value: 55 },
+    { name: 'Firefox', value: 35 },
+    { name: 'Safari', value: 10 },
+  ],
+  // Login by OS data
+  loginByOS: [
+    { name: 'Windows', value: 45 },
+    { name: 'macOS', value: 28 },
+    { name: 'Linux', value: 18 },
+    { name: 'Other', value: 9 },
+  ],
+  // Login by country data
+  loginByCountry: [
+    { name: 'United States', value: 100 },
+  ],
 };
 
