@@ -71,3 +71,11 @@ export const formatDateWithRelative = (date) => {
   }
 };
 
+/**
+ * Format wallet address (e.g., "0x1234...5678")
+ */
+export const formatWalletAddress = (address, prefixLen = 6, suffixLen = 4) => {
+  if (!address) return '';
+  return `${address.slice(0, prefixLen)}...${address.slice(-suffixLen)}`;
+};
+

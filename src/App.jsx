@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { WalletProvider } from './contexts/WalletContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import RoleGuard from './components/auth/RoleGuard';
 import Layout from './components/layout/Layout';
@@ -86,7 +87,8 @@ import ChangePassword from './pages/client/ChangePassword';
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <WalletProvider>
+        <Router>
         <Routes>
           {/* Public routes */}
           <Route path={ROUTES.LOGIN} element={<Login />} />
@@ -197,6 +199,7 @@ function App() {
           <Route path="/" element={<Navigate to={ROUTES.LOGIN} replace />} />
         </Routes>
       </Router>
+      </WalletProvider>
     </AuthProvider>
   );
 }

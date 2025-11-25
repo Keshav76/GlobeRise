@@ -93,5 +93,14 @@ export const STORAGE_KEYS = {
   PINS: 'pins',
   TRANSACTIONS: 'transactions',
   RANKINGS: 'rankings',
+  WALLET_ADDRESS: 'wallet_address',
+  WALLET_CONNECTED: 'wallet_connected',
+};
+
+// Supported networks
+export const SUPPORTED_NETWORKS = {
+  11155111: { name: 'Sepolia', currency: 'ETH' },
+  56: { name: 'BSC Mainnet', currency: 'BNB' },
+  97: { name: 'BSC Testnet', currency: 'tBNB' },
 };
 
