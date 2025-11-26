@@ -66,7 +66,7 @@ const Reports = () => {
             {chartData.length > 0 ? (
                 <EarningsChart data={chartData} />
             ) : (
-                <div className="bg-[#1a1f2e] p-6 rounded-lg border border-[#374151] text-center text-gray-400">
+                <div className="bg-[#393E46] p-6 rounded-lg border border-[#4b5563] text-center text-gray-400">
                     No earnings history available
                 </div>
             )}

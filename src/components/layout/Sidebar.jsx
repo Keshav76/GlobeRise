@@ -142,12 +142,12 @@ const Sidebar = () => {
   return (
     <div
       className="w-64 text-white h-screen fixed left-0 top-0 overflow-y-auto sidebar-scrollbar"
-      style={{ backgroundColor: '#071251', borderRight: '1px solid rgba(255,255,255,0.1)' }}
+      style={{ backgroundColor: '#222831', borderRight: '1px solid rgba(255,255,255,0.1)' }}
     >
       <div className="p-6 flex flex-col h-full">
         <div className="flex items-center space-x-2 mb-8">
-          <div className="w-10 h-10 bg-[#00d4ff] rounded-lg flex items-center justify-center">
-            <FaUsers className="text-xl text-[#0d1421]" />
+          <div className="w-10 h-10 bg-[#00ADB5] rounded-lg flex items-center justify-center">
+            <FaUsers className="text-xl text-white" />
           </div>
           <h1 className="text-xl font-bold text-white">GlobeRise</h1>
         </div>

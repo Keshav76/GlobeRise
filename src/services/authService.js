@@ -16,6 +16,9 @@ export const authService = {
     user.role = user.role.toLowerCase();
 
     localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, token);
+    if (refreshToken) {
+      localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, refreshToken);
+    }
     localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
     
     return { user, token };
@@ -28,12 +31,15 @@ export const authService = {
 
   async logout() {
     try {
-      // Optional: Call logout endpoint if backend supports it
-      // await api.post('/auth/logout');
+      const refreshToken = localStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN);
+      if (refreshToken) {
+        await api.post('/auth/logout', { refreshToken });
+      }
     } catch (error) {
       console.error('Logout error:', error);
     } finally {
       localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
+      localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
       localStorage.removeItem(STORAGE_KEYS.USER);
     }
   },
@@ -77,7 +83,7 @@ export const authService = {
 
   async verify2FA(tempToken, code) {
     const response = await api.post('/2fa/verify-login', { tempToken, code });
-    const { user, token } = response.data.data;
+    const { user, token, refreshToken } = response.data.data;
     
     // Normalize role
     if (user.role === 'USER') user.role = 'client';
@@ -85,6 +91,9 @@ export const authService = {
     user.role = user.role.toLowerCase();
 
     localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, token);
+    if (refreshToken) {
+      localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, refreshToken);
+    }
     localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
     
     return { user, token };

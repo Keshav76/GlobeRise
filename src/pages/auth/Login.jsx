@@ -49,7 +49,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0d1421] py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#222831] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
@@ -57,7 +57,7 @@ const Login = () => {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-400">
             Or{' '}
-            <Link to={ROUTES.REGISTER} className="font-medium text-[#00d4ff] hover:text-[#3b82f6]">
+            <Link to={ROUTES.REGISTER} className="font-medium text-[#00ADB5] hover:text-[#00ADB5]">
               create a new account
             </Link>
           </p>
@@ -92,7 +92,7 @@ const Login = () => {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 text-[#00d4ff] focus:ring-[#00d4ff] border-[#374151] rounded bg-[#252a3a]"
+                className="h-4 w-4 text-[#00ADB5] focus:ring-[#00ADB5] border-[#4b5563] rounded bg-[#393E46]"
                 {...register('rememberMe')}
               />
               <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
@@ -103,7 +103,7 @@ const Login = () => {
             <div className="text-sm">
               <Link
                 to={ROUTES.FORGOT_PASSWORD}
-                className="font-medium text-[#00d4ff] hover:text-[#3b82f6]"
+                className="font-medium text-[#00ADB5] hover:text-[#00ADB5]"
               >
                 Forgot password?
               </Link>

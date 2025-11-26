@@ -1,16 +1,16 @@
 import { FaTimes } from 'react-icons/fa';
 
-const Modal = ({ 
-  isOpen, 
-  onClose, 
-  title, 
-  children, 
+const Modal = ({
+  isOpen,
+  onClose,
+  title,
+  children,
   size = 'md',
   variant = 'dark',
-  className = '' 
+  className = ''
 }) => {
   if (!isOpen) return null;
-  
+
   const sizes = {
     sm: 'max-w-md',
     md: 'max-w-lg',
@@ -19,23 +19,23 @@ const Modal = ({
   };
 
   const isLight = variant === 'light';
-  const bgColor = isLight ? 'bg-white' : 'bg-[#1a1f2e]';
-  const borderColor = isLight ? 'border-gray-200' : 'border-[#374151]';
+  const bgColor = isLight ? 'bg-white' : 'bg-[#393E46]';
+  const borderColor = isLight ? 'border-gray-200' : 'border-[#4b5563]';
   const textColor = isLight ? 'text-gray-800' : 'text-white';
   const titleColor = isLight ? 'text-gray-800' : 'text-white';
   const closeButtonColor = isLight ? 'text-gray-400 hover:text-gray-600' : 'text-gray-400 hover:text-white';
-  
+
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Blurred backdrop */}
-      <div 
-        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity z-40" 
+      <div
+        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity z-40"
         onClick={onClose}
       ></div>
-      
+
       {/* Modal content */}
       <div className="relative z-50 flex items-center justify-center min-h-screen px-4 py-4">
-        <div 
+        <div
           className={`relative ${bgColor} rounded-lg text-left overflow-hidden shadow-2xl border ${borderColor} transform transition-all ${sizes[size]} w-full max-h-[90vh] overflow-y-auto ${className}`}
           onClick={(e) => e.stopPropagation()}
         >

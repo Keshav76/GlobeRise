@@ -164,7 +164,7 @@ const TransactionHistory = () => {
             />
 
             {/* Transactions Table */}
-            <div className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-6">
+            <div className="bg-[#393E46] border border-[#4b5563] rounded-lg p-6">
                 <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-semibold text-white">
                         Transactions
@@ -200,7 +200,7 @@ const TransactionHistory = () => {
 
                         {/* Pagination */}
                         {pagination && pagination.totalPages > 1 && (
-                            <div className="flex items-center justify-between mt-6 pt-4 border-t border-[#374151]">
+                            <div className="flex items-center justify-between mt-6 pt-4 border-t border-[#4b5563]">
                                 <div className="text-gray-400 text-sm">
                                     Page {pagination.page} of {pagination.totalPages}
                                 </div>
@@ -208,14 +208,14 @@ const TransactionHistory = () => {
                                     <button
                                         onClick={() => setCurrentPage(currentPage - 1)}
                                         disabled={currentPage === 1}
-                                        className="px-4 py-2 bg-[#0f1419] border border-[#374151] text-white rounded-lg hover:border-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="px-4 py-2 bg-[#0f1419] border border-[#4b5563] text-white rounded-lg hover:border-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         <FaChevronLeft />
                                     </button>
                                     <button
                                         onClick={() => setCurrentPage(currentPage + 1)}
                                         disabled={currentPage === pagination.totalPages}
-                                        className="px-4 py-2 bg-[#0f1419] border border-[#374151] text-white rounded-lg hover:border-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="px-4 py-2 bg-[#0f1419] border border-[#4b5563] text-white rounded-lg hover:border-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         <FaChevronRight />
                                     </button>

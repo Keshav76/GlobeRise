@@ -1,12 +1,12 @@
-const Card = ({ 
-  children, 
-  className = '', 
+const Card = ({
+  children,
+  className = '',
   title,
   action,
-  ...props 
+  ...props
 }) => {
   return (
-    <div className={`bg-[#1a1f2e] rounded-lg shadow-md border border-[#374151] p-6 ${className}`} {...props}>
+    <div className={`bg-[#393E46] rounded-lg shadow-md border border-[#4b5563] p-6 ${className}`} {...props}>
       {(title || action) && (
         <div className="flex justify-between items-center mb-4">
           {title && <h3 className="text-lg font-semibold text-white">{title}</h3>}

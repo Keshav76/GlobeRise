@@ -34,7 +34,7 @@ const ReferralTreeView = ({ treeData }) => {
 
     if (!treeData) {
         return (
-            <div className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-8">
+            <div className="bg-[#393E46] border border-[#4b5563] rounded-lg p-8">
                 <p className="text-gray-400 text-center">No network data available</p>
             </div>
         );
@@ -44,7 +44,7 @@ const ReferralTreeView = ({ treeData }) => {
         <div className="space-y-4">
             {/* Upline Section */}
             {treeData.upline && (
-                <div className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-6">
+                <div className="bg-[#393E46] border border-[#4b5563] rounded-lg p-6">
                     <h3 className="text-white font-semibold mb-4 flex items-center">
                         <FaUser className="mr-2 text-blue-500" />
                         Your Sponsor (Upline)
@@ -85,7 +85,7 @@ const ReferralTreeView = ({ treeData }) => {
             </div>
 
             {/* Downlines Section */}
-            <div className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-6">
+            <div className="bg-[#393E46] border border-[#4b5563] rounded-lg p-6">
                 <h3 className="text-white font-semibold mb-4 flex items-center">
                     <FaUser className="mr-2 text-green-500" />
                     Your Direct Referrals ({treeData.referrals?.length || 0})

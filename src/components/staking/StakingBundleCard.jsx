@@ -3,7 +3,7 @@ import { FaLock, FaClock, FaHistory } from 'react-icons/fa';
 
 const StakingBundleCard = ({ bundle, onStake }) => {
     return (
-        <div className="bg-[#1a1f2e] rounded-xl border border-[#374151] p-6 hover:shadow-lg hover:border-[#f59e0b] transition-all duration-300">
+        <div className="bg-[#393E46] rounded-xl border border-[#4b5563] p-6 hover:shadow-lg hover:border-[#f59e0b] transition-all duration-300">
             <div className="flex justify-between items-start mb-4">
                 <div className="p-3 bg-[#f59e0b]/20 rounded-lg">
                     <FaLock className="text-[#f59e0b] text-2xl" />

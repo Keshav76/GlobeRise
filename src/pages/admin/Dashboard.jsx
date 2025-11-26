@@ -65,7 +65,7 @@ const Dashboard = () => {
     red: '#ef4444',
     orange: '#f59e0b',
     purple: '#8b5cf6',
-    blue: '#00d4ff',
+    blue: '#00ADB5',
     coral: '#ff7f7f',
     mutedPurple: '#8b8bb8',
     yellow: '#ffd700',

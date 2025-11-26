@@ -38,7 +38,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0d1421] py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#222831] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
@@ -76,7 +76,7 @@ const ForgotPassword = () => {
           <div className="text-center">
             <Link
               to={ROUTES.LOGIN}
-              className="font-medium text-[#00d4ff] hover:text-[#3b82f6]"
+              className="font-medium text-[#00ADB5] hover:text-[#00ADB5]"
             >
               Back to login
             </Link>

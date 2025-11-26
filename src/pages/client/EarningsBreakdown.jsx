@@ -101,7 +101,7 @@ const EarningsBreakdown = () => {
                 {earningTypes.map((type) => {
                     const data = breakdown[type.key] || { total: '0', count: 0 };
                     return (
-                        <div key={type.key} className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-6">
+                        <div key={type.key} className="bg-[#393E46] border border-[#4b5563] rounded-lg p-6">
                             <div className="flex items-center justify-between mb-4">
                                 <div className={`w-12 h-12 rounded-lg bg-${type.color}-500/10 flex items-center justify-center`}>
                                     <type.icon className={`text-xl text-${type.color}-500`} />
@@ -126,7 +126,7 @@ const EarningsBreakdown = () => {
             )}
 
             {/* Breakdown Details */}
-            <div className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-6">
+            <div className="bg-[#393E46] border border-[#4b5563] rounded-lg p-6">
                 <h3 className="text-xl font-bold text-white mb-4">Detailed Breakdown</h3>
                 <div className="space-y-3">
                     {earningTypes.map((type) => {
@@ -146,7 +146,7 @@ const EarningsBreakdown = () => {
                                     </div>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                    <div className="flex-1 h-2 bg-[#1a1f2e] rounded-full overflow-hidden">
+                                    <div className="flex-1 h-2 bg-[#393E46] rounded-full overflow-hidden">
                                         <div
                                             className={`h-full bg-${type.color}-500 transition-all`}
                                             style={{ width: `${percentage}%` }}

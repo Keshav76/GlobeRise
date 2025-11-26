@@ -5,7 +5,7 @@ import RankBadge from './RankBadge';
 const RankRequirements = ({ ranks, currentRank }) => {
     if (!ranks || ranks.length === 0) {
         return (
-            <div className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-8 text-center">
+            <div className="bg-[#393E46] border border-[#4b5563] rounded-lg p-8 text-center">
                 <p className="text-gray-400">Loading rank requirements...</p>
             </div>
         );
@@ -16,7 +16,7 @@ const RankRequirements = ({ ranks, currentRank }) => {
 
     return (
         <div className="space-y-4">
-            <div className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-6">
+            <div className="bg-[#393E46] border border-[#4b5563] rounded-lg p-6">
                 <h2 className="text-xl font-bold text-white mb-6 flex items-center">
                     <FaTrophy className="mr-2 text-yellow-500" />
                     Rank Requirements & Benefits
@@ -34,7 +34,7 @@ const RankRequirements = ({ ranks, currentRank }) => {
                                         ? 'border-blue-500 shadow-lg shadow-blue-500/20'
                                         : isPastRank
                                             ? 'border-green-500/30 opacity-75'
-                                            : 'border-[#374151] hover:border-[#4b5563]'
+                                            : 'border-[#4b5563] hover:border-[#4b5563]'
                                     }`}
                             >
                                 <div className="flex items-start justify-between mb-4">
@@ -59,7 +59,7 @@ const RankRequirements = ({ ranks, currentRank }) => {
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     {/* Required Business */}
-                                    <div className="bg-[#1a1f2e] rounded p-3 border border-[#374151]">
+                                    <div className="bg-[#393E46] rounded p-3 border border-[#4b5563]">
                                         <div className="flex items-center space-x-2 text-gray-400 text-sm mb-2">
                                             <FaBriefcase />
                                             <span>Required Business</span>
@@ -70,7 +70,7 @@ const RankRequirements = ({ ranks, currentRank }) => {
                                     </div>
 
                                     {/* Rank Bonus */}
-                                    <div className="bg-[#1a1f2e] rounded p-3 border border-[#374151]">
+                                    <div className="bg-[#393E46] rounded p-3 border border-[#4b5563]">
                                         <div className="flex items-center space-x-2 text-gray-400 text-sm mb-2">
                                             <FaGift />
                                             <span>Rank Bonus</span>
@@ -82,7 +82,7 @@ const RankRequirements = ({ ranks, currentRank }) => {
                                     </div>
 
                                     {/* Royalty Percentage */}
-                                    <div className="bg-[#1a1f2e] rounded p-3 border border-[#374151]">
+                                    <div className="bg-[#393E46] rounded p-3 border border-[#4b5563]">
                                         <div className="flex items-center space-x-2 text-gray-400 text-sm mb-2">
                                             <FaPercentage />
                                             <span>Monthly Royalty</span>
@@ -96,7 +96,7 @@ const RankRequirements = ({ ranks, currentRank }) => {
 
                                 {/* Additional Info */}
                                 {rank.description && (
-                                    <div className="mt-4 p-3 bg-[#1a1f2e] rounded border border-[#374151]">
+                                    <div className="mt-4 p-3 bg-[#393E46] rounded border border-[#4b5563]">
                                         <p className="text-gray-400 text-sm">{rank.description}</p>
                                     </div>
                                 )}

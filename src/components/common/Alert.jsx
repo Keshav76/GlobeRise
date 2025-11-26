@@ -1,10 +1,10 @@
 import { FaCheckCircle, FaExclamationCircle, FaInfoCircle, FaTimesCircle } from 'react-icons/fa';
 
-const Alert = ({ 
-  type = 'info', 
-  message, 
+const Alert = ({
+  type = 'info',
+  message,
   onClose,
-  className = '' 
+  className = ''
 }) => {
   const variants = {
     success: {
@@ -26,16 +26,16 @@ const Alert = ({
       icon: FaExclamationCircle,
     },
     info: {
-      bg: 'bg-[#00d4ff]/20',
-      border: 'border-[#00d4ff]',
-      text: 'text-[#00d4ff]',
+      bg: 'bg-[#00ADB5]/20',
+      border: 'border-[#00ADB5]',
+      text: 'text-[#00ADB5]',
       icon: FaInfoCircle,
     },
   };
-  
+
   const variant = variants[type];
   const Icon = variant.icon;
-  
+
   return (
     <div className={`${variant.bg} ${variant.border} border-l-4 p-4 rounded ${className}`}>
       <div className="flex items-center">

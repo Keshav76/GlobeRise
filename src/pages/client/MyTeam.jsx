@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { referralService } from '../../services/referralService';
+import { dashboardService } from '../../services/dashboardService';
 import Table from '../../components/common/Table';
 import StatsCard from '../../components/common/StatsCard';
 import { FaUsers, FaUserPlus, FaSitemap } from 'react-icons/fa';
@@ -8,12 +9,17 @@ import Loading from '../../components/common/Loading';
 const MyTeam = () => {
     const [loading, setLoading] = useState(true);
     const [treeData, setTreeData] = useState(null);
+    const [myRank, setMyRank] = useState('NONE');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await referralService.getReferralTree();
-                setTreeData(data);
+                const [tree, stats] = await Promise.all([
+                    referralService.getReferralTree(),
+                    dashboardService.getStats()
+                ]);
+                setTreeData(tree);
+                setMyRank(stats?.rank || 'NONE');
             } catch (err) {
                 console.error(err);
             } finally {
@@ -27,7 +33,7 @@ const MyTeam = () => {
 
     const columns = [
         { header: 'Name', accessor: 'email', render: (value) => value ? value.split('@')[0] : 'N/A' }, // Using email as name for now if name not available
-        { header: 'Rank', accessor: 'rank' },
+        { header: 'Rank', accessor: 'rank', render: (value) => value || 'NONE' },
         { header: 'Directs', accessor: 'directCount' },
         { header: 'Team Size', accessor: 'teamCount' },
         { header: 'Total Business', accessor: 'totalTeamBusiness', render: (value) => `$${parseFloat(value || 0).toFixed(2)}` },
@@ -41,7 +47,7 @@ const MyTeam = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <StatsCard
                     title="My Rank"
-                    value={treeData?.upline?.rank || 'None'} // This might be wrong, need my rank
+                    value={myRank}
                     icon={FaSitemap}
                     color="purple"
                 />
@@ -60,7 +66,7 @@ const MyTeam = () => {
             </div>
 
             {treeData?.upline && (
-                <div className="bg-[#1a1f2e] rounded-lg border border-[#374151] p-6 mb-6">
+                <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6 mb-6">
                     <h2 className="text-xl font-bold text-white mb-4">My Upline</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-300">
                         <div>
@@ -69,7 +75,7 @@ const MyTeam = () => {
                         </div>
                         <div>
                             <span className="text-gray-500 block text-sm">Rank</span>
-                            <span className="font-medium text-[#00d4ff]">{treeData.upline.rank}</span>
+                            <span className="font-medium text-[#00ADB5]">{treeData.upline.rank || 'NONE'}</span>
                         </div>
                         <div>
                             <span className="text-gray-500 block text-sm">Total Downlines</span>
@@ -79,7 +85,7 @@ const MyTeam = () => {
                 </div>
             )}
 
-            <div className="bg-[#1a1f2e] rounded-lg border border-[#374151] p-6">
+            <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
                 <h2 className="text-xl font-bold text-white mb-4">My Direct Downline</h2>
                 <Table columns={columns} data={treeData?.referrals || []} />
             </div>

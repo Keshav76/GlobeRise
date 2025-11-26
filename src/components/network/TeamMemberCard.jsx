@@ -21,7 +21,7 @@ const TeamMemberCard = ({ member, onClick }) => {
     return (
         <div
             onClick={onClick}
-            className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-4 hover:border-blue-500 transition-all cursor-pointer"
+            className="bg-[#393E46] border border-[#4b5563] rounded-lg p-4 hover:border-blue-500 transition-all cursor-pointer"
         >
             <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center space-x-3">

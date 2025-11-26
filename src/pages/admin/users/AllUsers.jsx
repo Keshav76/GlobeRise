@@ -90,7 +90,7 @@ const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-[#3b82f6]">
+            <thead className="bg-[#00ADB5]">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">
                   User

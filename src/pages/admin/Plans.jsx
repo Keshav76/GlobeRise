@@ -183,7 +183,7 @@ const Plans = () => {
               e.stopPropagation();
               handleEdit(row);
             }}
-            className="flex items-center space-x-1 px-3 py-1.5 text-sm font-medium text-[#00d4ff] border border-[#00d4ff] rounded-lg hover:bg-[#00d4ff]/10 transition-colors"
+            className="flex items-center space-x-1 px-3 py-1.5 text-sm font-medium text-[#00ADB5] border border-[#00ADB5] rounded-lg hover:bg-[#00ADB5]/10 transition-colors"
           >
             <FaEdit className="w-3 h-3" />
             <span>Edit</span>
@@ -225,7 +225,7 @@ const Plans = () => {
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-[#3b82f6]">
+            <thead className="bg-[#00ADB5]">
               <tr>
                 {columns.map((column, index) => (
                   <th
@@ -528,13 +528,13 @@ const Plans = () => {
                 setIsDisableModalOpen(false);
                 setSelectedPlan(null);
               }}
-              className="px-6 py-2 bg-[#3b82f6] text-white rounded-lg hover:bg-[#2563eb] transition-colors font-medium"
+              className="px-6 py-2 bg-[#00ADB5] text-white rounded-lg hover:bg-[#2563eb] transition-colors font-medium"
             >
               No
             </button>
             <button
               onClick={handleConfirmDisable}
-              className="px-6 py-2 bg-[#00d4ff] text-white rounded-lg hover:bg-[#3b82f6] transition-colors font-medium"
+              className="px-6 py-2 bg-[#00ADB5] text-white rounded-lg hover:bg-[#00ADB5] transition-colors font-medium"
             >
               Yes
             </button>

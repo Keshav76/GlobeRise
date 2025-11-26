@@ -3,10 +3,10 @@ import { FaCheckCircle } from 'react-icons/fa';
 
 const ROIPlanCard = ({ plan, onInvest }) => {
     return (
-        <div className="bg-[#1a1f2e] rounded-xl border border-[#374151] overflow-hidden hover:border-[#00d4ff] transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
-            <div className="p-6 text-center border-b border-[#374151] bg-gradient-to-b from-[#252a3a] to-[#1a1f2e]">
+        <div className="bg-[#393E46] rounded-xl border border-[#4b5563] overflow-hidden hover:border-[#00ADB5] transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
+            <div className="p-6 text-center border-b border-[#4b5563] bg-gradient-to-b from-[#393E46] to-[#393E46]">
                 <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
-                <div className="text-4xl font-bold text-[#00d4ff] mb-1">
+                <div className="text-4xl font-bold text-[#00ADB5] mb-1">
                     {plan.roi}%
                     <span className="text-sm text-gray-400 font-normal ml-1">/ day</span>
                 </div>

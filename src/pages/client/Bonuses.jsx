@@ -114,7 +114,7 @@ const Bonuses = () => {
             </div>
 
             {/* Rank Bonus History */}
-            <div className="bg-[#1a1f2e] rounded-lg border border-[#374151] p-6">
+            <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
                 <h2 className="text-xl font-bold text-white mb-4 flex items-center">
                     <FaGift className="mr-2 text-yellow-500" />
                     Rank Bonus History
@@ -135,7 +135,7 @@ const Bonuses = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <button
                     onClick={() => navigate('/client/rank-progress')}
-                    className="bg-[#1a1f2e] border border-[#374151] hover:border-blue-500 rounded-lg p-6 text-left transition-all"
+                    className="bg-[#393E46] border border-[#4b5563] hover:border-blue-500 rounded-lg p-6 text-left transition-all"
                 >
                     <FaTrophy className="text-yellow-500 text-2xl mb-3" />
                     <h3 className="text-white font-semibold mb-2">View Rank Progress</h3>
@@ -143,7 +143,7 @@ const Bonuses = () => {
                 </button>
                 <button
                     onClick={() => navigate('/client/transaction-history')}
-                    className="bg-[#1a1f2e] border border-[#374151] hover:border-blue-500 rounded-lg p-6 text-left transition-all"
+                    className="bg-[#393E46] border border-[#4b5563] hover:border-blue-500 rounded-lg p-6 text-left transition-all"
                 >
                     <FaChartLine className="text-blue-500 text-2xl mb-3" />
                     <h3 className="text-white font-semibold mb-2">Transaction History</h3>

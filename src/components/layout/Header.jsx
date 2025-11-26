@@ -25,18 +25,18 @@ const Header = () => {
         </div>
 
         <div className="flex items-center space-x-4">
-          <button className="p-2 text-gray-300 hover:text-[#00d4ff] transition-colors">
+          <button className="p-2 text-gray-300 hover:text-[#00ADB5] transition-colors">
             <FaGlobe className="w-5 h-5" />
           </button>
 
-          <button className="relative p-2 text-gray-300 hover:text-[#00d4ff] transition-colors">
+          <button className="relative p-2 text-gray-300 hover:text-[#00ADB5] transition-colors">
             <FaBell className="w-5 h-5" />
             <span className="absolute top-0 right-0 bg-[#ef4444] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
               9+
             </span>
           </button>
 
-          <button className="p-2 text-gray-300 hover:text-[#00d4ff] transition-colors">
+          <button className="p-2 text-gray-300 hover:text-[#00ADB5] transition-colors">
             <FaWrench className="w-5 h-5" />
           </button>
 
@@ -45,8 +45,8 @@ const Header = () => {
               onClick={() => setShowUserMenu(!showUserMenu)}
               className="flex items-center space-x-2 px-3 py-2 text-gray-200 hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors"
             >
-              <div className="w-8 h-8 bg-[#00d4ff] rounded-full flex items-center justify-center">
-                <FaCheck className="w-4 h-4 text-[#0d1421]" />
+              <div className="w-8 h-8 bg-[#00ADB5] rounded-full flex items-center justify-center">
+                <FaCheck className="w-4 h-4 text-white" />
               </div>
               <span>{user?.name || user?.username || 'admin'}</span>
               <FaChevronDown className="w-4 h-4" />

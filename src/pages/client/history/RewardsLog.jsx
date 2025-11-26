@@ -40,7 +40,7 @@ const RewardsLog = () => {
     return (
         <div className="space-y-6">
             <h1 className="text-2xl font-bold text-white">Rewards History</h1>
-            <div className="bg-[#1a1f2e] rounded-lg border border-[#374151] p-6">
+            <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
                 <Table columns={columns} data={transactions} />
             </div>
         </div>

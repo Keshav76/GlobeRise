@@ -73,7 +73,7 @@ const WalletTransferModal = ({ isOpen, onClose, onTransfer, sourceWallet, balanc
                     <select
                         value={targetWallet}
                         onChange={(e) => setTargetWallet(e.target.value)}
-                        className="w-full px-3 py-2 bg-[#252a3a] border border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00d4ff] text-white"
+                        className="w-full px-3 py-2 bg-[#393E46] border border-[#4b5563] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ADB5] text-white"
                         required
                     >
                         <option value="">Select Wallet</option>

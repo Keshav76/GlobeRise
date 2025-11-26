@@ -7,7 +7,7 @@ const RankProgressBar = ({ currentRank, nextRank, currentBusiness, requiredBusin
     const remaining = Math.max(requiredBusiness - currentBusiness, 0);
 
     return (
-        <div className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-6">
+        <div className="bg-[#393E46] border border-[#4b5563] rounded-lg p-6">
             <div className="flex items-center justify-between mb-4">
                 <div>
                     <h3 className="text-white font-semibold text-lg mb-1">Rank Progress</h3>
@@ -48,7 +48,7 @@ const RankProgressBar = ({ currentRank, nextRank, currentBusiness, requiredBusin
             {nextRank && (
                 <>
                     <div className="mb-4">
-                        <div className="h-4 bg-[#0f1419] rounded-full overflow-hidden border border-[#374151]">
+                        <div className="h-4 bg-[#0f1419] rounded-full overflow-hidden border border-[#4b5563]">
                             <div
                                 className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-500 ease-out relative"
                                 style={{ width: `${progress}%` }}

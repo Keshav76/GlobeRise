@@ -36,14 +36,14 @@ const VerifyEmail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0d1421]">
+      <div className="min-h-screen flex items-center justify-center bg-[#222831]">
         <Loading size="lg" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0d1421] py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#222831] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 text-center">
         {success ? (
           <>
@@ -73,7 +73,7 @@ const VerifyEmail = () => {
               </Button>
               <Link
                 to={ROUTES.LOGIN}
-                className="block text-center text-sm font-medium text-[#00d4ff] hover:text-[#3b82f6]"
+                className="block text-center text-sm font-medium text-[#00ADB5] hover:text-[#00ADB5]"
               >
                 Back to login
               </Link>

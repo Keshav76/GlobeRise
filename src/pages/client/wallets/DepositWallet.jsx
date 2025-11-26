@@ -59,7 +59,7 @@ const DepositWallet = () => {
                 />
             </div>
 
-            <div className="bg-[#1a1f2e] rounded-lg border border-[#374151] p-6">
+            <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
                 <h2 className="text-xl font-bold text-white mb-4">Transaction History</h2>
                 <Table columns={columns} data={transactions} />
             </div>

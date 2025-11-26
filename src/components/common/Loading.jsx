@@ -4,10 +4,10 @@ const Loading = ({ size = 'md', className = '' }) => {
     md: 'w-8 h-8',
     lg: 'w-12 h-12',
   };
-  
+
   return (
     <div className={`flex justify-center items-center ${className}`}>
-      <div className={`${sizes[size]} border-4 border-[#374151] border-t-[#00d4ff] rounded-full animate-spin`}></div>
+      <div className={`${sizes[size]} border-4 border-[#4b5563] border-t-[#00ADB5] rounded-full animate-spin`}></div>
     </div>
   );
 };

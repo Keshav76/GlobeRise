@@ -73,18 +73,28 @@ const ClientDashboard = () => {
     );
   }
 
-  const StatCard = ({ title, value, icon: Icon, color = 'blue', subtitle }) => (
-    <div className={`bg-gradient-to-br from-${color}-50 to-white rounded-lg shadow-md border-l-4 border-${color}-500 p-6 hover:shadow-lg transition-shadow`}>
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-medium text-gray-600">{title}</h3>
-        <div className={`p-3 bg-${color}-100 rounded-full`}>
-          <Icon className={`text-${color}-600 text-xl`} />
+  const StatCard = ({ title, value, icon: Icon, color = 'blue', subtitle }) => {
+    const colorMap = {
+      green: { border: 'border-green-500', icon: 'text-green-400', iconBg: 'bg-green-500/20' },
+      blue: { border: 'border-[#00ADB5]', icon: 'text-[#00ADB5]', iconBg: 'bg-[#00ADB5]/20' },
+      purple: { border: 'border-purple-500', icon: 'text-purple-400', iconBg: 'bg-purple-500/20' },
+      yellow: { border: 'border-yellow-500', icon: 'text-yellow-400', iconBg: 'bg-yellow-500/20' },
+    };
+    const colors = colorMap[color] || colorMap.blue;
+
+    return (
+      <div className={`bg-[#393E46] rounded-lg shadow-md border-l-4 ${colors.border} p-6 hover:shadow-lg transition-shadow`}>
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-medium text-gray-400">{title}</h3>
+          <div className={`p-3 ${colors.iconBg} rounded-full`}>
+            <Icon className={`${colors.icon} text-xl`} />
+          </div>
         </div>
+        <div className="text-3xl font-bold text-white mb-1">{value}</div>
+        {subtitle && <p className="text-sm text-gray-400">{subtitle}</p>}
       </div>
-      <div className="text-3xl font-bold text-gray-900 mb-1">{value}</div>
-      {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
-    </div>
-  );
+    );
+  };
 
   const WalletCard = ({ title, balance, type }) => {
     const colors = {
@@ -97,7 +107,7 @@ const ClientDashboard = () => {
     const color = colors[type] || 'gray';
 
     return (
-      <div className={`bg-[#1a1f2e] rounded-lg border border-[#374151] p-4 hover:border-${color}-500 transition-colors`}>
+      <div className={`bg-[#393E46] rounded-lg border border-[#4b5563] p-4 hover:border-${color}-500 transition-colors`}>
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">{title}</p>
@@ -222,7 +232,7 @@ const ClientDashboard = () => {
       </div>
 
       {/* Wallet Balances Section */}
-      <div className="bg-[#1a1f2e] rounded-lg border border-[#374151] p-6">
+      <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
         <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
           <FaWallet className="text-blue-400" />
           Wallet Balances
@@ -257,7 +267,7 @@ const ClientDashboard = () => {
       </div>
 
       {/* Earnings Chart */}
-      <div className="bg-[#1a1f2e] rounded-lg border border-[#374151] p-6">
+      <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
         <h2 className="text-xl font-bold text-white mb-4">Earnings Trend (Last 7 Days)</h2>
         <div className="h-80">
           {chartData.length > 0 ? (

@@ -16,7 +16,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const { register: registerAuth } = useAuth();
   const navigate = useNavigate();
-  
+
   const {
     register,
     handleSubmit,
@@ -30,24 +30,30 @@ const Register = () => {
     setSuccess('');
     setLoading(true);
     try {
-      await registerAuth({
+      const payload = {
         email: data.email,
         password: data.password,
-        username: data.username,
-      });
-      setSuccess('Registration successful! Please verify your email.');
+      };
+
+      // Only include referralCode if it's provided
+      if (data.referralCode && data.referralCode.trim()) {
+        payload.referralCode = data.referralCode.trim().toUpperCase();
+      }
+
+      const result = await registerAuth(payload);
+      setSuccess('Registration successful! Please check your email to verify your account.');
       setTimeout(() => {
         navigate(ROUTES.LOGIN);
-      }, 2000);
+      }, 3000);
     } catch (err) {
-      setError(err.message || 'Registration failed. Please try again.');
+      setError(err.response?.data?.message || err.message || 'Registration failed. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0d1421] py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#222831] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
@@ -55,12 +61,12 @@ const Register = () => {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-400">
             Or{' '}
-            <Link to={ROUTES.LOGIN} className="font-medium text-[#00d4ff] hover:text-[#3b82f6]">
+            <Link to={ROUTES.LOGIN} className="font-medium text-[#00ADB5] hover:text-[#00ADB5]">
               sign in to your existing account
             </Link>
           </p>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           {error && (
             <Alert type="error" message={error} onClose={() => setError('')} />
@@ -68,39 +74,46 @@ const Register = () => {
           {success && (
             <Alert type="success" message={success} onClose={() => setSuccess('')} />
           )}
-          
+
           <div className="space-y-4">
-            <Input
-              label="Username"
-              type="text"
-              error={errors.username?.message}
-              required
-              {...register('username')}
-            />
-            
             <Input
               label="Email"
               type="email"
+              placeholder="you@example.com"
               error={errors.email?.message}
               required
               {...register('email')}
             />
-            
+
             <Input
               label="Password"
               type="password"
+              placeholder="Min 8 chars, 1 uppercase, 1 lowercase, 1 number"
               error={errors.password?.message}
               required
               {...register('password')}
             />
-            
+
             <Input
               label="Confirm Password"
               type="password"
+              placeholder="Re-enter your password"
               error={errors.confirmPassword?.message}
               required
               {...register('confirmPassword')}
             />
+
+            <Input
+              label="Referral Code (Optional)"
+              type="text"
+              placeholder="Enter 8-character code"
+              error={errors.referralCode?.message}
+              maxLength={8}
+              {...register('referralCode')}
+            />
+            <p className="text-xs text-gray-500 -mt-2">
+              Have a referral code? Enter it above to join under your sponsor.
+            </p>
           </div>
 
           <div className="flex items-center">
@@ -108,12 +121,12 @@ const Register = () => {
               id="terms"
               name="terms"
               type="checkbox"
-              className="h-4 w-4 text-[#00d4ff] focus:ring-[#00d4ff] border-[#374151] rounded bg-[#252a3a]"
+              className="h-4 w-4 text-[#00ADB5] focus:ring-[#00ADB5] border-[#4b5563] rounded bg-[#393E46]"
               {...register('termsAccepted')}
             />
             <label htmlFor="terms" className="ml-2 block text-sm text-gray-300">
               I agree to the{' '}
-              <a href="#" className="text-[#00d4ff] hover:text-[#3b82f6]">
+              <a href="#" className="text-[#00ADB5] hover:text-[#00ADB5]">
                 terms and conditions
               </a>
             </label>
@@ -124,7 +137,7 @@ const Register = () => {
 
           <div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? <Loading size="sm" /> : 'Register'}
+              {loading ? <Loading size="sm" /> : 'Create Account'}
             </Button>
           </div>
         </form>

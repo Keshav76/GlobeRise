@@ -3,7 +3,7 @@ import Header from './Header';
 
 const Layout = ({ children }) => {
   return (
-    <div className="flex h-screen bg-[#0d1421]">
+    <div className="flex h-screen bg-[#222831]">
       <Sidebar />
       <div className="flex-1 ml-64 flex flex-col overflow-hidden">
         <Header />

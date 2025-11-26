@@ -40,7 +40,7 @@ const TransactionFilters = ({ onFilterChange, currentFilters }) => {
     };
 
     return (
-        <div className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-4">
+        <div className="bg-[#393E46] border border-[#4b5563] rounded-lg p-4">
             <div className="flex items-center justify-between mb-4">
                 <h3 className="text-white font-semibold flex items-center">
                     <FaFilter className="mr-2 text-blue-500" />
@@ -48,7 +48,7 @@ const TransactionFilters = ({ onFilterChange, currentFilters }) => {
                 </h3>
                 <button
                     onClick={resetFilters}
-                    className="px-3 py-1 text-sm text-gray-400 hover:text-white border border-[#374151] hover:border-blue-500 rounded transition-colors"
+                    className="px-3 py-1 text-sm text-gray-400 hover:text-white border border-[#4b5563] hover:border-blue-500 rounded transition-colors"
                 >
                     Reset
                 </button>
@@ -63,7 +63,7 @@ const TransactionFilters = ({ onFilterChange, currentFilters }) => {
                     <select
                         value={filters.type || 'ALL'}
                         onChange={(e) => handleFilterChange('type', e.target.value)}
-                        className="w-full bg-[#0f1419] border border-[#374151] text-white rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500"
+                        className="w-full bg-[#0f1419] border border-[#4b5563] text-white rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500"
                     >
                         {transactionTypes.map((type) => (
                             <option key={type.value} value={type.value}>
@@ -81,7 +81,7 @@ const TransactionFilters = ({ onFilterChange, currentFilters }) => {
                     <select
                         value={filters.wallet || 'ALL'}
                         onChange={(e) => handleFilterChange('wallet', e.target.value)}
-                        className="w-full bg-[#0f1419] border border-[#374151] text-white rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500"
+                        className="w-full bg-[#0f1419] border border-[#4b5563] text-white rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500"
                     >
                         {walletTypes.map((wallet) => (
                             <option key={wallet.value} value={wallet.value}>

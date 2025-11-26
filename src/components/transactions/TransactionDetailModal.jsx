@@ -44,9 +44,9 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
 
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="bg-[#1a1f2e] border border-[#374151] rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-[#393E46] border border-[#4b5563] rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-[#374151]">
+                <div className="flex items-center justify-between p-6 border-b border-[#4b5563]">
                     <h2 className="text-xl font-bold text-white">Transaction Details</h2>
                     <button
                         onClick={onClose}
@@ -96,7 +96,7 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
                                 {transaction.sourceWallet && (
                                     <div className="text-center">
                                         <div className="text-xs text-gray-500 mb-1">From</div>
-                                        <div className="px-3 py-2 bg-[#1a1f2e] rounded border border-[#374151] text-white font-semibold">
+                                        <div className="px-3 py-2 bg-[#393E46] rounded border border-[#4b5563] text-white font-semibold">
                                             {transaction.sourceWallet}
                                         </div>
                                     </div>
@@ -109,7 +109,7 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
                                 {transaction.destWallet && (
                                     <div className="text-center">
                                         <div className="text-xs text-gray-500 mb-1">To</div>
-                                        <div className="px-3 py-2 bg-[#1a1f2e] rounded border border-[#374151] text-white font-semibold">
+                                        <div className="px-3 py-2 bg-[#393E46] rounded border border-[#4b5563] text-white font-semibold">
                                             {transaction.destWallet}
                                         </div>
                                     </div>
@@ -149,7 +149,7 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
                 </div>
 
                 {/* Footer */}
-                <div className="p-6 border-t border-[#374151]">
+                <div className="p-6 border-t border-[#4b5563]">
                     <button
                         onClick={onClose}
                         className="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"

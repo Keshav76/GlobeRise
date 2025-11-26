@@ -83,21 +83,21 @@ const MyReferrals = () => {
 
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <div className="bg-[#1a1f2e] rounded-lg border border-[#374151] p-6">
+        <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
           <div className="flex items-center justify-between mb-2">
             <div className="text-sm font-semibold text-gray-400">Direct Referrals</div>
             <FaUser className="text-blue-500" />
           </div>
           <div className="text-3xl font-bold text-white">{totalDirect}</div>
         </div>
-        <div className="bg-[#1a1f2e] rounded-lg border border-[#374151] p-6">
+        <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
           <div className="flex items-center justify-between mb-2">
             <div className="text-sm font-semibold text-gray-400">Total Team</div>
             <FaUsers className="text-green-500" />
           </div>
           <div className="text-3xl font-bold text-white">{totalTeam}</div>
         </div>
-        <div className="bg-[#1a1f2e] rounded-lg border border-[#374151] p-6">
+        <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
           <div className="flex items-center justify-between mb-2">
             <div className="text-sm font-semibold text-gray-400">Team Business</div>
             <FaBriefcase className="text-purple-500" />
@@ -107,8 +107,8 @@ const MyReferrals = () => {
       </div>
 
       {/* Referrals Table */}
-      <div className="bg-[#1a1f2e] rounded-lg border border-[#374151] overflow-hidden">
-        <div className="p-4 border-b border-[#374151]">
+      <div className="bg-[#393E46] rounded-lg border border-[#4b5563] overflow-hidden">
+        <div className="p-4 border-b border-[#4b5563]">
           <h3 className="text-lg font-semibold text-white">Direct Referrals ({totalDirect})</h3>
         </div>
         <div className="overflow-x-auto">
@@ -135,7 +135,7 @@ const MyReferrals = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-[#1a1f2e] divide-y divide-[#374151]">
+            <tbody className="bg-[#393E46] divide-y divide-[#4b5563]">
               {referrals.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-6 py-8 text-center text-gray-400">

@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  /* Dark Theme Colors - Crypto Style */
-  --color-dark-bg: #0d1421;
-  --color-dark-bg-secondary: #1a1f2e;
-  --color-dark-bg-tertiary: #252a3a;
-  --color-dark-border: #374151;
-  --color-dark-border-light: #4b5563;
+  /* Dark Theme Colors - Teal/Pink Scheme */
+  --color-dark-bg: #222831;
+  --color-dark-bg-secondary: #393E46;
+  --color-dark-bg-tertiary: #393E46;
+  --color-dark-border: #4b5563;
+  --color-dark-border-light: #6b7280;
 
   /* Text Colors */
   --color-text-primary: #ffffff;
@@ -14,14 +14,19 @@
   --color-text-tertiary: #9ca3af;
 
   /* Accent Colors */
-  --color-primary: #00d4ff;
-  --color-primary-dark: #3b82f6;
+  --color-primary: #00ADB5;
+  --color-primary-dark: #008c92;
+  --color-secondary: #FF2E63;
   --color-success: #10b981;
   --color-danger: #ef4444;
   --color-warning: #f59e0b;
 
   /* Sidebar */
-  --color-sidebar: #1a1f2e;
+  --color-sidebar: #222831;
+
+  /* Glow Effects */
+  --shadow-glow-teal: 0 0 20px -5px rgba(0, 173, 181, 0.5);
+  --shadow-glow-red: 0 0 20px -5px rgba(255, 46, 99, 0.5);
 }
 
 body {
@@ -32,7 +37,7 @@ body {
 /* Custom Sidebar Scrollbar */
 .sidebar-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #0a1647 #071251;
+  scrollbar-color: #393E46 #222831;
 }
 
 .sidebar-scrollbar::-webkit-scrollbar {
@@ -40,16 +45,16 @@ body {
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-track {
-  background: #071251;
+  background: #222831;
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #0a1647;
+  background-color: #393E46;
   border-radius: 3px;
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #050f3a;
+  background-color: #4b5563;
 }
 
 /* Sidebar Submenu Animation */

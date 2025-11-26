@@ -42,7 +42,7 @@ const NetworkStats = ({ data }) => {
             {stats.map((stat, index) => (
                 <div
                     key={index}
-                    className="bg-[#1a1f2e] border border-[#374151] rounded-lg p-6 hover:border-blue-500 transition-all"
+                    className="bg-[#393E46] border border-[#4b5563] rounded-lg p-6 hover:border-blue-500 transition-all"
                 >
                     <div className="flex items-center justify-between">
                         <div>
