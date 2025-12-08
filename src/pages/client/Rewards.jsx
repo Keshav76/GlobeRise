@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { transactionService } from "../../services/transactionService";
 import { walletService } from "../../services/walletService";
 import Table from "../../components/common/Table";
@@ -22,7 +22,9 @@ import Button from "../../components/common/Button";
 
 const Rewards = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("roi"); // 'roi', 'levelIncome', 'bonuses', 'royalties'
+  const [searchParams] = useSearchParams();
+  const tabFromUrl = searchParams.get('tab') || 'roi';
+  const [activeTab, setActiveTab] = useState(tabFromUrl); // 'roi', 'levelIncome', 'bonuses', 'royalties'
   const [loading, setLoading] = useState(true);
   const [tabLoading, setTabLoading] = useState(false);
   const [error, setError] = useState("");
@@ -42,6 +44,11 @@ const Rewards = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const tabFromUrl = searchParams.get('tab') || 'roi';
+    setActiveTab(tabFromUrl);
+  }, [searchParams]);
 
   useEffect(() => {
     if (activeTab) {
@@ -66,6 +73,10 @@ const Rewards = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleTabChange = (tab) => {
+    navigate(`?tab=${tab}`);
   };
 
   const loadTabData = async () => {
@@ -101,8 +112,7 @@ const Rewards = () => {
     } catch (err) {
       console.error(`Error loading ${activeTab} data:`, err);
       setError(
-        `Failed to load ${activeTab} transactions: ${
-          err.response?.data?.message || err.message
+        `Failed to load ${activeTab} transactions: ${err.response?.data?.message || err.message
         }`
       );
     } finally {
@@ -185,13 +195,12 @@ const Rewards = () => {
       accessor: "status",
       render: (value) => (
         <span
-          className={`px-2 py-1 rounded text-xs ${
-            value === "COMPLETED"
-              ? "bg-green-500/20 text-green-400"
-              : value === "PENDING"
+          className={`px-2 py-1 rounded text-xs ${value === "COMPLETED"
+            ? "bg-green-500/20 text-green-400"
+            : value === "PENDING"
               ? "bg-yellow-500/20 text-yellow-400"
               : "bg-gray-500/20 text-gray-400"
-          }`}
+            }`}
         >
           {value || "N/A"}
         </span>
@@ -276,45 +285,41 @@ const Rewards = () => {
       {/* Tab Navigation */}
       <div className="flex gap-2 border-b border-[#4b5563]">
         <button
-          onClick={() => setActiveTab("roi")}
-          className={`px-6 py-3 font-semibold transition-colors ${
-            activeTab === "roi"
-              ? "text-[#00ADB5] border-b-2 border-[#00ADB5]"
-              : "text-gray-400 hover:text-white"
-          }`}
+          onClick={() => handleTabChange("roi")}
+          className={`px-6 py-3 font-semibold transition-colors ${activeTab === "roi"
+            ? "text-[#00ADB5] border-b-2 border-[#00ADB5]"
+            : "text-gray-400 hover:text-white"
+            }`}
         >
           <FaChartLine className="inline mr-2" />
           ROI
         </button>
         <button
-          onClick={() => setActiveTab("levelIncome")}
-          className={`px-6 py-3 font-semibold transition-colors ${
-            activeTab === "levelIncome"
-              ? "text-[#00ADB5] border-b-2 border-[#00ADB5]"
-              : "text-gray-400 hover:text-white"
-          }`}
+          onClick={() => handleTabChange("levelIncome")}
+          className={`px-6 py-3 font-semibold transition-colors ${activeTab === "levelIncome"
+            ? "text-[#00ADB5] border-b-2 border-[#00ADB5]"
+            : "text-gray-400 hover:text-white"
+            }`}
         >
           <FaCoins className="inline mr-2" />
           Level Income
         </button>
         <button
-          onClick={() => setActiveTab("bonuses")}
-          className={`px-6 py-3 font-semibold transition-colors ${
-            activeTab === "bonuses"
-              ? "text-[#00ADB5] border-b-2 border-[#00ADB5]"
-              : "text-gray-400 hover:text-white"
-          }`}
+          onClick={() => handleTabChange("bonuses")}
+          className={`px-6 py-3 font-semibold transition-colors ${activeTab === "bonuses"
+            ? "text-[#00ADB5] border-b-2 border-[#00ADB5]"
+            : "text-gray-400 hover:text-white"
+            }`}
         >
           <FaGift className="inline mr-2" />
           Bonuses
         </button>
         <button
-          onClick={() => setActiveTab("royalties")}
-          className={`px-6 py-3 font-semibold transition-colors ${
-            activeTab === "royalties"
-              ? "text-[#00ADB5] border-b-2 border-[#00ADB5]"
-              : "text-gray-400 hover:text-white"
-          }`}
+          onClick={() => handleTabChange("royalties")}
+          className={`px-6 py-3 font-semibold transition-colors ${activeTab === "royalties"
+            ? "text-[#00ADB5] border-b-2 border-[#00ADB5]"
+            : "text-gray-400 hover:text-white"
+            }`}
         >
           <FaCrown className="inline mr-2" />
           Royalties

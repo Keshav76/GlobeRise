@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { investmentService } from '../../services/investmentService';
 import { walletService } from '../../services/walletService';
 import { formatCurrency } from '../../utils/formatters';
@@ -8,7 +9,10 @@ import Button from '../../components/common/Button';
 import StakingCalculator from '../../components/staking/StakingCalculator';
 
 const Investments = () => {
-    const [activeTab, setActiveTab] = useState('packages'); // 'packages' or 'staking'
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const tabFromUrl = searchParams.get('tab') || 'packages';
+    const [activeTab, setActiveTab] = useState(tabFromUrl); // 'packages' or 'staking'
     const [depositBalance, setDepositBalance] = useState(0);
     const [packages, setPackages] = useState([]);
     const [stakes, setStakes] = useState([]);
@@ -31,6 +35,15 @@ const Investments = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    useEffect(() => {
+        const tabFromUrl = searchParams.get('tab') || 'packages';
+        setActiveTab(tabFromUrl);
+    }, [searchParams]);
+
+    const handleTabChange = (tab) => {
+        navigate(`?tab=${tab}`);
+    };
 
     const fetchData = async () => {
         try {
@@ -161,23 +174,21 @@ const Investments = () => {
             {/* Tab Navigation */}
             <div className="flex gap-2 border-b border-[#4b5563]">
                 <button
-                    onClick={() => setActiveTab('packages')}
-                    className={`px-6 py-3 font-semibold transition-colors ${
-                        activeTab === 'packages'
-                            ? 'text-[#00ADB5] border-b-2 border-[#00ADB5]'
-                            : 'text-gray-400 hover:text-white'
-                    }`}
+                    onClick={() => handleTabChange('packages')}
+                    className={`px-6 py-3 font-semibold transition-colors ${activeTab === 'packages'
+                        ? 'text-[#00ADB5] border-b-2 border-[#00ADB5]'
+                        : 'text-gray-400 hover:text-white'
+                        }`}
                 >
                     <FaRocket className="inline mr-2" />
                     Packages
                 </button>
                 <button
-                    onClick={() => setActiveTab('staking')}
-                    className={`px-6 py-3 font-semibold transition-colors ${
-                        activeTab === 'staking'
-                            ? 'text-[#00ADB5] border-b-2 border-[#00ADB5]'
-                            : 'text-gray-400 hover:text-white'
-                    }`}
+                    onClick={() => handleTabChange('staking')}
+                    className={`px-6 py-3 font-semibold transition-colors ${activeTab === 'staking'
+                        ? 'text-[#00ADB5] border-b-2 border-[#00ADB5]'
+                        : 'text-gray-400 hover:text-white'
+                        }`}
                 >
                     <FaLock className="inline mr-2" />
                     Staking
@@ -188,153 +199,153 @@ const Investments = () => {
             {activeTab === 'packages' && (
                 <>
 
-            {/* Create Package Section */}
-            <div className="bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg border border-blue-700 p-6">
-                <div className="flex items-center gap-3 mb-4">
-                    <FaRocket className="text-blue-300 text-2xl" />
-                    <h2 className="text-2xl font-bold text-white">Create New Package</h2>
-                </div>
-
-                <div className="bg-blue-950/50 rounded-lg p-4 mb-4">
-                    <p className="text-blue-200 text-sm mb-2">
-                        <strong>Available Deposit Balance:</strong> {formatCurrency(depositBalance)} GRT
-                    </p>
-                    <p className="text-blue-300 text-xs">
-                        💡 Deposit from your linked wallet (MetaMask/Trust Wallet) to create packages. Minimum: 100 GRT tokens.
-                    </p>
-                </div>
-
-                <form onSubmit={handleCreatePackage} className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium text-blue-200 mb-2">
-                            Investment Amount (Minimum 100 GRT)
-                        </label>
-                        <input
-                            type="number"
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
-                            placeholder="Enter amount"
-                            className="w-full px-4 py-3 bg-blue-950/50 border border-blue-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            disabled={creatingPackage}
-                            min="100"
-                            step="0.01"
-                        />
-                    </div>
-
-                    {error && (
-                        <div className="bg-red-500/20 border border-red-500 text-red-200 px-4 py-3 rounded-lg">
-                            {error}
+                    {/* Create Package Section */}
+                    <div className="bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg border border-blue-700 p-6">
+                        <div className="flex items-center gap-3 mb-4">
+                            <FaRocket className="text-blue-300 text-2xl" />
+                            <h2 className="text-2xl font-bold text-white">Create New Package</h2>
                         </div>
-                    )}
 
-                    {success && (
-                        <div className="bg-green-500/20 border border-green-500 text-green-200 px-4 py-3 rounded-lg flex items-center gap-2">
-                            <FaCheckCircle />
-                            {success}
+                        <div className="bg-blue-950/50 rounded-lg p-4 mb-4">
+                            <p className="text-blue-200 text-sm mb-2">
+                                <strong>Available Deposit Balance:</strong> {formatCurrency(depositBalance)} GRT
+                            </p>
+                            <p className="text-blue-300 text-xs">
+                                💡 Deposit from your linked wallet (MetaMask/Trust Wallet) to create packages. Minimum: 100 GRT tokens.
+                            </p>
                         </div>
-                    )}
 
-                    <Button
-                        type="submit"
-                        variant="primary"
-                        className="w-full py-3 text-lg font-bold"
-                        disabled={creatingPackage}
-                    >
-                        {creatingPackage ? (
-                            <span className="flex items-center justify-center gap-2">
-                                <FaSpinner className="animate-spin" />
-                                Creating Package...
-                            </span>
-                        ) : (
-                            'Create Package'
-                        )}
-                    </Button>
-                </form>
-            </div>
+                        <form onSubmit={handleCreatePackage} className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-blue-200 mb-2">
+                                    Investment Amount (Minimum 100 GRT)
+                                </label>
+                                <input
+                                    type="number"
+                                    value={amount}
+                                    onChange={(e) => setAmount(e.target.value)}
+                                    placeholder="Enter amount"
+                                    className="w-full px-4 py-3 bg-blue-950/50 border border-blue-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    disabled={creatingPackage}
+                                    min="100"
+                                    step="0.01"
+                                />
+                            </div>
 
-            {/* Active Packages */}
-            <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                    <FaCoins className="text-yellow-400" />
-                    Active Packages
-                </h2>
-
-                {packages.length === 0 ? (
-                    <div className="text-center py-12 text-gray-400">
-                        <p className="text-lg mb-2">No active packages yet</p>
-                        <p className="text-sm">Create your first package above to start earning ROI</p>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {packages.map((pkg) => {
-                            const { totalRoiPaid, capLimit, progress, capMultiplier } = calculateROIProgress(pkg);
-                            const isActive = pkg.status === 'ACTIVE';
-                            const roiRate = parseFloat(pkg.roiRate);
-
-                            return (
-                                <div
-                                    key={pkg.id}
-                                    className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-gray-700 p-6 hover:border-blue-500 transition-colors"
-                                >
-                                    <div className="flex items-center justify-between mb-4">
-                                        <div>
-                                            <p className="text-sm text-gray-400">Package Amount</p>
-                                            <p className="text-3xl font-bold text-white">
-                                                {formatCurrency(pkg.amount)}
-                                            </p>
-                                        </div>
-                                        <div className={`px-3 py-1 rounded-full text-xs font-bold ${isActive ? 'bg-green-500/20 text-green-300' : 'bg-gray-500/20 text-gray-300'
-                                            }`}>
-                                            {pkg.status}
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-3 mb-4">
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-gray-400">ROI Rate:</span>
-                                            <span className={`font-bold ${roiRate >= 12 ? 'text-purple-400' : roiRate >= 10 ? 'text-blue-400' : 'text-green-400'
-                                                }`}>
-                                                {roiRate}% per month
-                                            </span>
-                                        </div>
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-gray-400">Cap Limit:</span>
-                                            <span className="text-white font-medium">{capMultiplier}x ({formatCurrency(capLimit)})</span>
-                                        </div>
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-gray-400">Start Date:</span>
-                                            <span className="text-white">{new Date(pkg.startDate).toLocaleDateString()}</span>
-                                        </div>
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-gray-400">Last ROI:</span>
-                                            <span className="text-white">
-                                                {pkg.lastRoiDate ? new Date(pkg.lastRoiDate).toLocaleDateString() : 'Not yet paid'}
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-gray-950/50 rounded-lg p-4">
-                                        <div className="flex justify-between text-sm mb-2">
-                                            <span className="text-gray-400">ROI Progress:</span>
-                                            <span className="text-white font-medium">
-                                                {formatCurrency(totalRoiPaid)} / {formatCurrency(capLimit)}
-                                            </span>
-                                        </div>
-                                        <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-                                            <div
-                                                className={`h-full ${progress >= 100 ? 'bg-red-500' : progress >= 75 ? 'bg-yellow-500' : 'bg-green-500'
-                                                    } transition-all duration-500`}
-                                                style={{ width: `${progress}%` }}
-                                            />
-                                        </div>
-                                        <p className="text-xs text-gray-400 mt-1">{progress.toFixed(1)}% of cap reached</p>
-                                    </div>
+                            {error && (
+                                <div className="bg-red-500/20 border border-red-500 text-red-200 px-4 py-3 rounded-lg">
+                                    {error}
                                 </div>
-                            );
-                        })}
+                            )}
+
+                            {success && (
+                                <div className="bg-green-500/20 border border-green-500 text-green-200 px-4 py-3 rounded-lg flex items-center gap-2">
+                                    <FaCheckCircle />
+                                    {success}
+                                </div>
+                            )}
+
+                            <Button
+                                type="submit"
+                                variant="primary"
+                                className="w-full py-3 text-lg font-bold"
+                                disabled={creatingPackage}
+                            >
+                                {creatingPackage ? (
+                                    <span className="flex items-center justify-center gap-2">
+                                        <FaSpinner className="animate-spin" />
+                                        Creating Package...
+                                    </span>
+                                ) : (
+                                    'Create Package'
+                                )}
+                            </Button>
+                        </form>
                     </div>
-                )}
-            </div>
+
+                    {/* Active Packages */}
+                    <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
+                        <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                            <FaCoins className="text-yellow-400" />
+                            Active Packages
+                        </h2>
+
+                        {packages.length === 0 ? (
+                            <div className="text-center py-12 text-gray-400">
+                                <p className="text-lg mb-2">No active packages yet</p>
+                                <p className="text-sm">Create your first package above to start earning ROI</p>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {packages.map((pkg) => {
+                                    const { totalRoiPaid, capLimit, progress, capMultiplier } = calculateROIProgress(pkg);
+                                    const isActive = pkg.status === 'ACTIVE';
+                                    const roiRate = parseFloat(pkg.roiRate);
+
+                                    return (
+                                        <div
+                                            key={pkg.id}
+                                            className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-gray-700 p-6 hover:border-blue-500 transition-colors"
+                                        >
+                                            <div className="flex items-center justify-between mb-4">
+                                                <div>
+                                                    <p className="text-sm text-gray-400">Package Amount</p>
+                                                    <p className="text-3xl font-bold text-white">
+                                                        {formatCurrency(pkg.amount)}
+                                                    </p>
+                                                </div>
+                                                <div className={`px-3 py-1 rounded-full text-xs font-bold ${isActive ? 'bg-green-500/20 text-green-300' : 'bg-gray-500/20 text-gray-300'
+                                                    }`}>
+                                                    {pkg.status}
+                                                </div>
+                                            </div>
+
+                                            <div className="space-y-3 mb-4">
+                                                <div className="flex justify-between text-sm">
+                                                    <span className="text-gray-400">ROI Rate:</span>
+                                                    <span className={`font-bold ${roiRate >= 12 ? 'text-purple-400' : roiRate >= 10 ? 'text-blue-400' : 'text-green-400'
+                                                        }`}>
+                                                        {roiRate}% per month
+                                                    </span>
+                                                </div>
+                                                <div className="flex justify-between text-sm">
+                                                    <span className="text-gray-400">Cap Limit:</span>
+                                                    <span className="text-white font-medium">{capMultiplier}x ({formatCurrency(capLimit)})</span>
+                                                </div>
+                                                <div className="flex justify-between text-sm">
+                                                    <span className="text-gray-400">Start Date:</span>
+                                                    <span className="text-white">{new Date(pkg.startDate).toLocaleDateString()}</span>
+                                                </div>
+                                                <div className="flex justify-between text-sm">
+                                                    <span className="text-gray-400">Last ROI:</span>
+                                                    <span className="text-white">
+                                                        {pkg.lastRoiDate ? new Date(pkg.lastRoiDate).toLocaleDateString() : 'Not yet paid'}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div className="bg-gray-950/50 rounded-lg p-4">
+                                                <div className="flex justify-between text-sm mb-2">
+                                                    <span className="text-gray-400">ROI Progress:</span>
+                                                    <span className="text-white font-medium">
+                                                        {formatCurrency(totalRoiPaid)} / {formatCurrency(capLimit)}
+                                                    </span>
+                                                </div>
+                                                <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                                                    <div
+                                                        className={`h-full ${progress >= 100 ? 'bg-red-500' : progress >= 75 ? 'bg-yellow-500' : 'bg-green-500'
+                                                            } transition-all duration-500`}
+                                                        style={{ width: `${progress}%` }}
+                                                    />
+                                                </div>
+                                                <p className="text-xs text-gray-400 mt-1">{progress.toFixed(1)}% of cap reached</p>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </div>
 
                     {/* Info Section */}
                     <div className="bg-blue-900/20 border border-blue-800 rounded-lg p-6">
@@ -383,8 +394,8 @@ const Investments = () => {
                                             type="button"
                                             onClick={() => setDuration(tier.months)}
                                             className={`py-3 px-2 rounded-lg text-sm font-medium transition-all ${duration === tier.months
-                                                    ? 'bg-purple-600 text-white shadow-lg scale-105'
-                                                    : 'bg-purple-950/50 text-purple-300 hover:bg-purple-900/50'
+                                                ? 'bg-purple-600 text-white shadow-lg scale-105'
+                                                : 'bg-purple-950/50 text-purple-300 hover:bg-purple-900/50'
                                                 }`}
                                         >
                                             <div className="font-bold">{tier.label}</div>

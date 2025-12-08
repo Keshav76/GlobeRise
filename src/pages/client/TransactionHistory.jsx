@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { transactionService } from '../../services/transactionService';
 import { formatCurrency } from '../../utils/formatters';
 import Loading from '../../components/common/Loading';
@@ -9,13 +10,16 @@ import Table from '../../components/common/Table';
 import { FaHistory, FaChevronLeft, FaChevronRight, FaDownload, FaFileCsv, FaFilePdf } from 'react-icons/fa';
 
 const TransactionHistory = () => {
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const tabFromUrl = searchParams.get('tab') || 'ALL';
     const [transactions, setTransactions] = useState([]);
     const [allTransactions, setAllTransactions] = useState([]); // For export
     const [pagination, setPagination] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [filters, setFilters] = useState({ type: 'ALL', wallet: 'ALL' });
-    const [activeTab, setActiveTab] = useState('ALL'); // Filter tabs
+    const [activeTab, setActiveTab] = useState(tabFromUrl); // Filter tabs
     const [dateRange, setDateRange] = useState({ startDate: '', endDate: '' });
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -37,6 +41,11 @@ const TransactionHistory = () => {
     useEffect(() => {
         loadTransactions();
     }, [filters, currentPage, activeTab, dateRange]);
+
+    useEffect(() => {
+        const tabFromUrl = searchParams.get('tab') || 'ALL';
+        setActiveTab(tabFromUrl);
+    }, [searchParams]);
 
     useEffect(() => {
         if (activeTab !== 'ALL') {
@@ -93,6 +102,10 @@ const TransactionHistory = () => {
     const handleFilterChange = (newFilters) => {
         setFilters(newFilters);
         setCurrentPage(1); // Reset to first page when filters change
+    };
+
+    const handleTabChange = (tab) => {
+        navigate(`?tab=${tab}`);
     };
 
     const exportToCSV = () => {
@@ -293,12 +306,11 @@ const TransactionHistory = () => {
                     {transactionTypes.map((type) => (
                         <button
                             key={type.key}
-                            onClick={() => setActiveTab(type.key)}
-                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                                activeTab === type.key
-                                    ? 'bg-[#00ADB5] text-white'
-                                    : 'bg-[#222831] text-gray-400 hover:text-white'
-                            }`}
+                            onClick={() => handleTabChange(type.key)}
+                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === type.key
+                                ? 'bg-[#00ADB5] text-white'
+                                : 'bg-[#222831] text-gray-400 hover:text-white'
+                                }`}
                         >
                             {type.label}
                         </button>
