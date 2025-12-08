@@ -72,9 +72,9 @@ const LiveRatesWidget = () => {
         <h3 className="text-white font-semibold">Live Rates</h3>
         <span className="text-xs text-gray-400">Updates every 5 min</span>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-2 md:gap-3">
         <RateCard symbol="USDT" price={rates.usdt.price} change24h={rates.usdt.change24h} />
-        <RateCard symbol="GRT" price={rates.grt.price} change24h={rates.grt.change24h} />
+        <RateCard symbol="RISE" price={rates.grt.price} change24h={rates.grt.change24h} />
         <RateCard symbol="FLUFFY" price={rates.fluffy.price} change24h={rates.fluffy.change24h} />
       </div>
     </div>

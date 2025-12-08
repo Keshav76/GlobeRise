@@ -70,7 +70,7 @@ const Investments = () => {
 
         const amountNum = parseFloat(amount);
         if (!amountNum || amountNum < 100) {
-            setError('Minimum investment amount is 100 GRT tokens');
+            setError('Minimum investment amount is 100 RISE tokens');
             return;
         }
 
@@ -167,15 +167,15 @@ const Investments = () => {
 
     return (
         <div className="space-y-6">
-            <div className="flex items-center justify-between">
-                <h1 className="text-3xl font-bold text-white">Investments</h1>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">Investments</h1>
             </div>
 
             {/* Tab Navigation */}
-            <div className="flex gap-2 border-b border-[#4b5563]">
+            <div className="flex gap-2 border-b border-[#4b5563] overflow-x-auto">
                 <button
                     onClick={() => handleTabChange('packages')}
-                    className={`px-6 py-3 font-semibold transition-colors ${activeTab === 'packages'
+                    className={`px-4 md:px-6 py-2 md:py-3 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${activeTab === 'packages'
                         ? 'text-[#00ADB5] border-b-2 border-[#00ADB5]'
                         : 'text-gray-400 hover:text-white'
                         }`}
@@ -185,7 +185,7 @@ const Investments = () => {
                 </button>
                 <button
                     onClick={() => handleTabChange('staking')}
-                    className={`px-6 py-3 font-semibold transition-colors ${activeTab === 'staking'
+                    className={`px-4 md:px-6 py-2 md:py-3 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${activeTab === 'staking'
                         ? 'text-[#00ADB5] border-b-2 border-[#00ADB5]'
                         : 'text-gray-400 hover:text-white'
                         }`}
@@ -200,25 +200,25 @@ const Investments = () => {
                 <>
 
                     {/* Create Package Section */}
-                    <div className="bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg border border-blue-700 p-6">
-                        <div className="flex items-center gap-3 mb-4">
-                            <FaRocket className="text-blue-300 text-2xl" />
-                            <h2 className="text-2xl font-bold text-white">Create New Package</h2>
+                    <div className="bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg border border-blue-700 p-4 md:p-6">
+                        <div className="flex items-center gap-2 md:gap-3 mb-4">
+                            <FaRocket className="text-blue-300 text-xl md:text-2xl" />
+                            <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-white">Create New Package</h2>
                         </div>
 
                         <div className="bg-blue-950/50 rounded-lg p-4 mb-4">
                             <p className="text-blue-200 text-sm mb-2">
-                                <strong>Available Deposit Balance:</strong> {formatCurrency(depositBalance)} GRT
+                                <strong>Available Deposit Balance:</strong> {formatCurrency(depositBalance)} RISE
                             </p>
                             <p className="text-blue-300 text-xs">
-                                💡 Deposit from your linked wallet (MetaMask/Trust Wallet) to create packages. Minimum: 100 GRT tokens.
+                                💡 Deposit from your linked wallet (MetaMask/Trust Wallet) to create packages. Minimum: 100 RISE tokens.
                             </p>
                         </div>
 
                         <form onSubmit={handleCreatePackage} className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-blue-200 mb-2">
-                                    Investment Amount (Minimum 100 GRT)
+                                    Investment Amount (Minimum 100 RISE)
                                 </label>
                                 <input
                                     type="number"
@@ -264,8 +264,8 @@ const Investments = () => {
                     </div>
 
                     {/* Active Packages */}
-                    <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
-                        <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                    <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-4 md:p-6">
+                        <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-4 flex items-center gap-2">
                             <FaCoins className="text-yellow-400" />
                             Active Packages
                         </h2>
@@ -276,7 +276,7 @@ const Investments = () => {
                                 <p className="text-sm">Create your first package above to start earning ROI</p>
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
                                 {packages.map((pkg) => {
                                     const { totalRoiPaid, capLimit, progress, capMultiplier } = calculateROIProgress(pkg);
                                     const isActive = pkg.status === 'ACTIVE';
@@ -285,12 +285,12 @@ const Investments = () => {
                                     return (
                                         <div
                                             key={pkg.id}
-                                            className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-gray-700 p-6 hover:border-blue-500 transition-colors"
+                                            className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-gray-700 p-4 md:p-6 hover:border-blue-500 transition-colors"
                                         >
                                             <div className="flex items-center justify-between mb-4">
                                                 <div>
                                                     <p className="text-sm text-gray-400">Package Amount</p>
-                                                    <p className="text-3xl font-bold text-white">
+                                                    <p className="text-2xl md:text-3xl font-bold text-white">
                                                         {formatCurrency(pkg.amount)}
                                                     </p>
                                                 </div>
@@ -348,10 +348,10 @@ const Investments = () => {
                     </div>
 
                     {/* Info Section */}
-                    <div className="bg-blue-900/20 border border-blue-800 rounded-lg p-6">
+                    <div className="bg-blue-900/20 border border-blue-800 rounded-lg p-4 md:p-6">
                         <h3 className="text-lg font-bold text-blue-300 mb-3">Package Information</h3>
                         <ul className="space-y-2 text-sm text-blue-200">
-                            <li>• <strong>Minimum Investment:</strong> 100 GRT tokens</li>
+                            <li>• <strong>Minimum Investment:</strong> 100 RISE tokens</li>
                             <li>• <strong>Base ROI:</strong> 8% per month up to 2.5x cap</li>
                             <li>• <strong>Speed Bonus 1:</strong> 10% ROI & 3x cap (Get 2 direct refs within 14 days)</li>
                             <li>• <strong>Speed Bonus 2:</strong> 12% ROI & 4x cap (Get 4 direct refs within 21 days)</li>
@@ -367,15 +367,15 @@ const Investments = () => {
             {activeTab === 'staking' && (
                 <>
                     {/* Create Stake Section */}
-                    <div className="bg-gradient-to-br from-purple-900 to-purple-800 rounded-lg border border-purple-700 p-6">
-                        <div className="flex items-center gap-3 mb-4">
-                            <FaLock className="text-purple-300 text-2xl" />
-                            <h2 className="text-2xl font-bold text-white">Create New Stake</h2>
+                    <div className="bg-gradient-to-br from-purple-900 to-purple-800 rounded-lg border border-purple-700 p-4 md:p-6">
+                        <div className="flex items-center gap-2 md:gap-3 mb-4">
+                            <FaLock className="text-purple-300 text-xl md:text-2xl" />
+                            <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-white">Create New Stake</h2>
                         </div>
 
                         <div className="bg-purple-950/50 rounded-lg p-4 mb-4">
                             <p className="text-purple-200 text-sm mb-2">
-                                <strong>Available Deposit Balance:</strong> {formatCurrency(depositBalance)} GRT
+                                <strong>Available Deposit Balance:</strong> {formatCurrency(depositBalance)} RISE
                             </p>
                             <p className="text-purple-300 text-xs">
                                 💡 <strong>Note:</strong> Deposit from your linked wallet first. Staked funds are locked until maturity. Principal + Interest will be transferred to Reward wallet upon completion.
@@ -387,7 +387,7 @@ const Investments = () => {
                                 <label className="block text-sm font-medium text-purple-200 mb-2">
                                     Staking Duration
                                 </label>
-                                <div className="grid grid-cols-5 gap-2">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
                                     {stakingTiers.map((tier) => (
                                         <button
                                             key={tier.months}
@@ -424,7 +424,7 @@ const Investments = () => {
                             {amount && selectedTier && (
                                 <div className="bg-purple-950/70 rounded-lg p-4 border border-purple-700">
                                     <h3 className="font-bold text-purple-200 mb-2">Expected Return</h3>
-                                    <div className="grid grid-cols-2 gap-4 text-sm">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                                         <div>
                                             <p className="text-purple-300">Principal:</p>
                                             <p className="text-white font-bold">{formatCurrency(parseFloat(amount) || 0)}</p>
@@ -477,8 +477,8 @@ const Investments = () => {
                     </div>
 
                     {/* Active Stakes */}
-                    <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-6">
-                        <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                    <div className="bg-[#393E46] rounded-lg border border-[#4b5563] p-4 md:p-6">
+                        <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-4 flex items-center gap-2">
                             <FaClock className="text-purple-400" />
                             Active Stakes
                         </h2>
@@ -489,7 +489,7 @@ const Investments = () => {
                                 <p className="text-sm">Create your first stake above to earn guaranteed returns</p>
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
                                 {stakes.map((stake) => {
                                     const { progress, daysRemaining } = calculateStakeProgress(stake);
                                     const isActive = stake.status === 'ACTIVE';
@@ -501,12 +501,12 @@ const Investments = () => {
                                     return (
                                         <div
                                             key={stake.id}
-                                            className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-gray-700 p-6 hover:border-purple-500 transition-colors"
+                                            className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-gray-700 p-4 md:p-6 hover:border-purple-500 transition-colors"
                                         >
                                             <div className="flex items-center justify-between mb-4">
                                                 <div>
                                                     <p className="text-sm text-gray-400">Staked Amount</p>
-                                                    <p className="text-3xl font-bold text-white">
+                                                    <p className="text-2xl md:text-3xl font-bold text-white">
                                                         {formatCurrency(stakeAmount)}
                                                     </p>
                                                 </div>

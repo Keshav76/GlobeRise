@@ -19,7 +19,7 @@ const StakingCalculator = () => {
 
     const calculateReturn = () => {
         if (!selectedTier || !amountNum) return { principal: 0, interest: 0, total: 0, roi: 0 };
-        
+
         const monthlyReturn = (amountNum * selectedTier.rate) / 100;
         const totalInterest = monthlyReturn * duration;
         const totalReturn = amountNum + totalInterest;
@@ -47,7 +47,7 @@ const StakingCalculator = () => {
                 <div className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-300 mb-2">
-                            Staking Amount (GRT)
+                            Staking Amount (RISE)
                         </label>
                         <input
                             type="number"
@@ -70,11 +70,10 @@ const StakingCalculator = () => {
                                     key={tier.months}
                                     type="button"
                                     onClick={() => setDuration(tier.months)}
-                                    className={`py-2 px-2 rounded-lg text-xs font-medium transition-all ${
-                                        duration === tier.months
+                                    className={`py-2 px-2 rounded-lg text-xs font-medium transition-all ${duration === tier.months
                                             ? 'bg-purple-600 text-white shadow-lg'
                                             : 'bg-[#222831] text-gray-300 hover:bg-[#2a2f38] border border-[#4b5563]'
-                                    }`}
+                                        }`}
                                 >
                                     <div className="font-bold">{tier.label}</div>
                                     <div className="text-xs mt-1">{tier.rate}%/mo</div>
@@ -87,34 +86,34 @@ const StakingCalculator = () => {
                 {/* Results Section */}
                 <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-500/30 p-6">
                     <h4 className="text-lg font-semibold text-white mb-4">Expected Returns</h4>
-                    
+
                     {amountNum > 0 ? (
                         <div className="space-y-4">
                             <div className="flex justify-between items-center pb-3 border-b border-purple-500/30">
                                 <span className="text-gray-300">Principal:</span>
                                 <span className="text-white font-bold text-lg">{formatCurrency(result.principal)}</span>
                             </div>
-                            
+
                             <div className="flex justify-between items-center pb-3 border-b border-purple-500/30">
                                 <span className="text-gray-300">Monthly Rate:</span>
                                 <span className="text-purple-400 font-semibold">{selectedTier.rate}%</span>
                             </div>
-                            
+
                             <div className="flex justify-between items-center pb-3 border-b border-purple-500/30">
                                 <span className="text-gray-300">Duration:</span>
                                 <span className="text-white font-semibold">{duration} months</span>
                             </div>
-                            
+
                             <div className="flex justify-between items-center pb-3 border-b border-purple-500/30">
                                 <span className="text-gray-300">Total Interest:</span>
                                 <span className="text-green-400 font-bold">{formatCurrency(result.interest)}</span>
                             </div>
-                            
+
                             <div className="flex justify-between items-center pt-2">
                                 <span className="text-white font-semibold">Total Return:</span>
                                 <span className="text-green-400 font-bold text-2xl">{formatCurrency(result.total)}</span>
                             </div>
-                            
+
                             <div className="mt-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-300 text-sm">ROI:</span>

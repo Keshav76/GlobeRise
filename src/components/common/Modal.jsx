@@ -34,17 +34,17 @@ const Modal = ({
       ></div>
 
       {/* Modal content */}
-      <div className="relative z-50 flex items-center justify-center min-h-screen px-4 py-4">
+      <div className="relative z-50 flex items-center justify-center min-h-screen p-4">
         <div
-          className={`relative ${bgColor} rounded-lg text-left overflow-hidden shadow-2xl border ${borderColor} transform transition-all ${sizes[size]} w-full max-h-[90vh] overflow-y-auto ${className}`}
+          className={`relative ${bgColor} rounded-lg text-left overflow-hidden shadow-2xl border ${borderColor} transform transition-all w-full ${sizes[size]} md:max-h-[90vh] max-h-screen overflow-y-auto ${className}`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className={`${bgColor} px-4 pt-5 pb-4 sm:p-6`}>
-            <div className="flex justify-between items-center mb-4">
-              {title && <h3 className={`text-lg font-medium ${titleColor}`}>{title}</h3>}
+          <div className={`${bgColor} px-4 pt-4 pb-4 sm:p-6`}>
+            <div className="flex justify-between items-start mb-4">
+              {title && <h3 className={`text-base md:text-lg font-medium ${titleColor}`}>{title}</h3>}
               <button
                 onClick={onClose}
-                className={`${closeButtonColor} focus:outline-none transition-colors`}
+                className={`${closeButtonColor} focus:outline-none transition-colors touch-target p-1`}
               >
                 <FaTimes className="w-5 h-5" />
               </button>

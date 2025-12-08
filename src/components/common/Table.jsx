@@ -5,14 +5,14 @@ const Table = ({
   onRowClick,
 }) => {
   return (
-    <div className="overflow-x-auto">
+    <div className="table-responsive">
       <table className={`min-w-full divide-y divide-[#4b5563] ${className}`}>
         <thead className="bg-[#393E46]">
           <tr>
             {columns.map((column, index) => (
               <th
                 key={index}
-                className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                className="px-3 md:px-6 py-2 md:py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
               >
                 {column.header}
               </th>
@@ -34,7 +34,7 @@ const Table = ({
                 onClick={() => onRowClick && onRowClick(row)}
               >
                 {columns.map((column, colIndex) => (
-                  <td key={colIndex} className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                  <td key={colIndex} className="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm text-gray-300">
                     {column.render ? column.render(row[column.accessor], row) : row[column.accessor]}
                   </td>
                 ))}

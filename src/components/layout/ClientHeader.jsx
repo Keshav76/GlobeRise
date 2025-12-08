@@ -27,8 +27,9 @@ import { formatWalletAddress } from "../../utils/formatters";
 import WalletLinkModal from "../wallet/WalletLinkModal";
 import NotificationDropdown from "../notifications/NotificationDropdown";
 import UserMenu from "./UserMenu";
+import MobileMenuButton from "./MobileMenuButton";
 
-const ClientHeader = () => {
+const ClientHeader = ({ onMenuToggle }) => {
   const { user: _user } = useAuth();
   const { address, isConnected, isCorrectNetwork, networkName } = useWallet();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -119,47 +120,47 @@ const ClientHeader = () => {
 
   return (
     <>
-      <div className="bg-[#393E46] shadow-sm border-b border-[#4b5563] px-6 py-4">
+      <div className="bg-[#393E46] shadow-sm border-b border-[#4b5563] px-4 md:px-6 py-3 md:py-4">
         <div className="flex items-center justify-between">
-          {/* Page Title */}
-          {(() => {
-            const { title, Icon } = getPageMeta();
-            return (
-              <div className="flex items-center space-x-2">
-                {Icon && <Icon className="w-5 h-5 text-[#00ADB5]" />}
-                <h1 className="text-xl font-bold text-white tracking-wide">
-                  {title}
-                </h1>
-              </div>
-            );
-          })()}
+          {/* Mobile Menu Button & Page Title */}
+          <div className="flex items-center space-x-3">
+            <MobileMenuButton isOpen={false} onClick={onMenuToggle} />
+            {(() => {
+              const { title, Icon } = getPageMeta();
+              return (
+                <div className="flex items-center space-x-2">
+                  {Icon && <Icon className="w-4 h-4 md:w-5 md:h-5 text-[#00ADB5]" />}
+                  <h1 className="text-base md:text-xl font-bold text-white tracking-wide truncate">
+                    {title}
+                  </h1>
+                </div>
+              );
+            })()}
+          </div>
 
           {/* User Avatar and Wallet */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 md:space-x-3">
             {/* Notifications */}
             <NotificationDropdown />
-            
+
             {/* Wallet Status */}
             {linkedWallets.length > 0 ? (
-              <div className="flex items-center space-x-2">
-                {/* Network Indicator (if wallet is connected) */}
+              <div className="flex items-center space-x-1 md:space-x-2">
+                {/* Network Indicator (if wallet is connected) - Hide on very small screens */}
                 {isConnected && (
                   <div
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg border ${
-                      isCorrectNetwork
+                    className={`hidden sm:flex items-center space-x-2 px-2 md:px-3 py-1.5 md:py-2 rounded-lg border ${isCorrectNetwork
                         ? "bg-green-500/20 border-green-500"
                         : "bg-red-500/20 border-red-500"
-                    }`}
+                      }`}
                   >
                     <div
-                      className={`w-2 h-2 rounded-full ${
-                        isCorrectNetwork ? "bg-green-500" : "bg-red-500"
-                      }`}
+                      className={`w-2 h-2 rounded-full ${isCorrectNetwork ? "bg-green-500" : "bg-red-500"
+                        }`}
                     ></div>
                     <span
-                      className={`text-xs font-medium ${
-                        isCorrectNetwork ? "text-green-400" : "text-red-400"
-                      }`}
+                      className={`text-xs font-medium ${isCorrectNetwork ? "text-green-400" : "text-red-400"
+                        }`}
                     >
                       {networkName}
                     </span>
@@ -168,28 +169,28 @@ const ClientHeader = () => {
                 {/* Show first linked wallet or connected wallet */}
                 <button
                   onClick={handleWalletClick}
-                  className="flex items-center space-x-2 text-sm font-semibold text-[#00ADB5] px-4 py-2 rounded hover:bg-[#00ADB5]/10 transition-colors border border-[#00ADB5]"
+                  className="flex items-center space-x-1.5 md:space-x-2 text-xs md:text-sm font-semibold text-[#00ADB5] px-2 md:px-4 py-1.5 md:py-2 rounded hover:bg-[#00ADB5]/10 transition-colors border border-[#00ADB5]"
                 >
-                  <FaWallet className="w-4 h-4" />
-                  <span>
+                  <FaWallet className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                  <span className="hidden sm:inline">
                     {isConnected && address
                       ? formatWalletAddress(address)
                       : linkedWallets[0]
-                      ? formatWalletAddress(linkedWallets[0].address)
-                      : "Link Wallet"}
+                        ? formatWalletAddress(linkedWallets[0].address)
+                        : "Link Wallet"}
                   </span>
                 </button>
               </div>
             ) : (
               <button
                 onClick={handleWalletClick}
-                className="flex items-center space-x-2 text-sm font-semibold text-[#00ADB5] px-4 py-2 rounded hover:bg-[#00ADB5]/10 transition-colors border border-[#00ADB5]"
+                className="flex items-center space-x-1.5 md:space-x-2 text-xs md:text-sm font-semibold text-[#00ADB5] px-2 md:px-4 py-1.5 md:py-2 rounded hover:bg-[#00ADB5]/10 transition-colors border border-[#00ADB5]"
               >
-                <FaWallet className="w-4 h-4" />
-                <span>Link Wallet</span>
+                <FaWallet className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                <span className="hidden sm:inline">Link Wallet</span>
               </button>
             )}
-            
+
             {/* User Menu */}
             <UserMenu />
           </div>

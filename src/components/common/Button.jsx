@@ -6,9 +6,10 @@ const Button = ({
   disabled = false,
   type = 'button',
   onClick,
+  fullWidth = false,
   ...props
 }) => {
-  const baseStyles = 'font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2';
+  const baseStyles = 'font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 touch-target';
 
   const variants = {
     primary: 'bg-[#00ADB5] text-white hover:bg-[#008c92] focus:ring-[#00ADB5] font-semibold',
@@ -20,8 +21,8 @@ const Button = ({
   };
 
   const sizes = {
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2 text-base',
+    sm: 'px-3 py-2 text-sm',
+    md: 'px-4 py-2.5 text-base',
     lg: 'px-6 py-3 text-lg',
   };
 
@@ -30,7 +31,7 @@ const Button = ({
   return (
     <button
       type={type}
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${disabledStyles} ${className}`}
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${disabledStyles} ${fullWidth ? 'w-full' : ''} ${className}`}
       onClick={onClick}
       disabled={disabled}
       {...props}

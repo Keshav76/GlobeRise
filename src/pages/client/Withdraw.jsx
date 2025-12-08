@@ -58,7 +58,7 @@ const Withdraw = () => {
       setPendingWithdrawals(allWithdrawals.filter(t => t.status === 'PENDING'));
       setWithdrawalHistory(allWithdrawals);
       setLinkedWallets(wallets || []);
-      
+
       // Auto-select connected wallet if available, otherwise first linked wallet
       if (wallet?.address) {
         const connectedWallet = wallets?.find(w => w.address.toLowerCase() === wallet.address.toLowerCase());
@@ -206,7 +206,7 @@ const Withdraw = () => {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-yellow-300 mb-1">Rewards Wallet Balance</p>
-            <h2 className="text-4xl font-bold text-white mb-2">{formatCurrency(rewardBalance)} GRT</h2>
+            <h2 className="text-4xl font-bold text-white mb-2">{formatCurrency(rewardBalance)} RISE</h2>
             <p className="text-yellow-200 text-sm">
               Transfer from Rewards to Withdrawal wallet to withdraw funds
             </p>
@@ -215,7 +215,7 @@ const Withdraw = () => {
         </div>
         <div className="mt-4 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
           <p className="text-yellow-200 text-sm">
-            <strong>Max Withdrawable:</strong> <span className="text-white font-bold">{formatCurrency(rewardBalance)} GRT</span>
+            <strong>Max Withdrawable:</strong> <span className="text-white font-bold">{formatCurrency(rewardBalance)} RISE</span>
           </p>
         </div>
       </div>
@@ -399,12 +399,11 @@ const Withdraw = () => {
                 header: 'Status',
                 accessor: 'status',
                 render: (value) => (
-                  <span className={`px-2 py-1 rounded text-xs ${
-                    value === 'COMPLETED' ? 'bg-green-500/20 text-green-400' :
-                    value === 'PENDING' ? 'bg-yellow-500/20 text-yellow-400' :
-                    value === 'REJECTED' ? 'bg-red-500/20 text-red-400' :
-                    'bg-gray-500/20 text-gray-400'
-                  }`}>
+                  <span className={`px-2 py-1 rounded text-xs ${value === 'COMPLETED' ? 'bg-green-500/20 text-green-400' :
+                      value === 'PENDING' ? 'bg-yellow-500/20 text-yellow-400' :
+                        value === 'REJECTED' ? 'bg-red-500/20 text-red-400' :
+                          'bg-gray-500/20 text-gray-400'
+                    }`}>
                     {value}
                   </span>
                 )

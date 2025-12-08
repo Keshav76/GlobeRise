@@ -26,12 +26,13 @@ import {
   FaWallet,
   FaExchangeAlt,
   FaCreditCard,
+  FaTimes,
 } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth";
 import { ROUTES } from "../../utils/constants";
 import Logo from "../common/Logo";
 
-const ClientSidebar = () => {
+const ClientSidebar = ({ isOpen = false, onClose = () => { } }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,6 +53,10 @@ const ClientSidebar = () => {
 
   const handleSubMenuClick = (path, tabParam) => {
     navigate(`${path}?tab=${tabParam}`);
+    // Close mobile sidebar after navigation
+    if (window.innerWidth < 1024) {
+      onClose();
+    }
   };
 
   const menuItems = [
@@ -144,10 +149,21 @@ const ClientSidebar = () => {
   ];
 
   return (
-    <div className="w-64 bg-[#222831] h-screen fixed left-0 top-0 border-r border-[#4b5563]">
+    <div
+      className={`w-64 bg-[#222831] h-screen fixed left-0 top-0 border-r border-[#4b5563] z-50 transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}
+    >
       <div className="p-4 flex flex-col h-full">
-        <div className="pb-4">
+        <div className="pb-4 flex items-center justify-between">
           <Logo variant="sidebar" />
+          {/* Mobile Close Button */}
+          <button
+            onClick={onClose}
+            className="lg:hidden p-2 rounded-lg text-gray-400 hover:bg-[#393E46] hover:text-white transition-colors"
+            aria-label="Close menu"
+          >
+            <FaTimes className="w-5 h-5" />
+          </button>
         </div>
         {/* Navigation Menu */}
         <nav className="space-y-1 flex-1 overflow-y-auto sidebar-scrollbar">
@@ -191,8 +207,8 @@ const ClientSidebar = () => {
                                 handleSubMenuClick(item.path, submenu.tab)
                               }
                               className={`flex items-center w-full px-4 py-2 text-sm rounded-lg transition-colors ${isSubmenuActive
-                                  ? "text-[#00ADB5] bg-[#00ADB5]/10 font-semibold"
-                                  : "text-gray-400 hover:text-[#00ADB5] hover:bg-[#393E46]"
+                                ? "text-[#00ADB5] bg-[#00ADB5]/10 font-semibold"
+                                : "text-gray-400 hover:text-[#00ADB5] hover:bg-[#393E46]"
                                 }`}
                             >
                               <span className="ml-6">{submenu.label}</span>
@@ -205,6 +221,12 @@ const ClientSidebar = () => {
                 ) : (
                   <NavLink
                     to={item.path}
+                    onClick={() => {
+                      // Close mobile sidebar after navigation
+                      if (window.innerWidth < 1024) {
+                        onClose();
+                      }
+                    }}
                     className={({ isActive }) =>
                       `flex items-center space-x-3 px-4 py-3 text-sm font-medium rounded-lg transition-colors ${isActive
                         ? "bg-[#00ADB5]/10 text-[#00ADB5]"

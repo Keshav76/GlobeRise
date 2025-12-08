@@ -26,16 +26,16 @@ const StatsCard = ({
 
   return (
     <div
-      className={`bg-[#393E46] border-l-4 rounded-lg shadow-md border border-[#4b5563] p-6 cursor-pointer hover:shadow-lg hover:bg-[#4b5563] transition-all ${colors[color]} ${className}`}
+      className={`bg-[#393E46] border-l-4 rounded-lg shadow-md border border-[#4b5563] p-4 md:p-6 cursor-pointer hover:shadow-lg hover:bg-[#4b5563] transition-all ${colors[color]} ${className}`}
       onClick={onClick}
     >
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-400 mb-1">{title}</p>
-          <p className="text-2xl font-bold text-white">{value}</p>
+          <p className="text-xs md:text-sm font-medium text-gray-400 mb-1">{title}</p>
+          <p className="text-xl md:text-2xl font-bold text-white">{value}</p>
         </div>
-        <div className={`${iconColors[color]} p-3 rounded-full`}>
-          {Icon && <Icon className="text-2xl" />}
+        <div className={`${iconColors[color]} p-2 md:p-3 rounded-full`}>
+          {Icon && <Icon className="text-xl md:text-2xl" />}
         </div>
       </div>
       {onClick && (

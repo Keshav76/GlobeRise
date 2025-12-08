@@ -152,7 +152,7 @@ const Rewards = () => {
       setSuccess(
         `Successfully transferred ${formatCurrency(
           amountNum
-        )} GRT to Deposit Wallet!`
+        )} RISE to Deposit Wallet!`
       );
       setShowTransferModal(false);
       setTransferAmount("");
@@ -227,7 +227,7 @@ const Rewards = () => {
             <p className="text-gray-400 text-sm">
               Available in Rewards Wallet:{" "}
               <span className="text-green-400 font-semibold">
-                {formatCurrency(rewardBalance)} GRT
+                {formatCurrency(rewardBalance)} RISE
               </span>
             </p>
           </div>
@@ -435,13 +435,13 @@ const Rewards = () => {
           <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
             <p className="text-sm text-blue-300 mb-2">Available Balance:</p>
             <p className="text-2xl font-bold text-white">
-              {formatCurrency(rewardBalance)} GRT
+              {formatCurrency(rewardBalance)} RISE
             </p>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">
-              Transfer Amount (GRT)
+              Transfer Amount (RISE)
             </label>
             <input
               type="number"
@@ -455,7 +455,7 @@ const Rewards = () => {
               disabled={transferring}
             />
             <p className="text-xs text-gray-400 mt-1">
-              Maximum: {formatCurrency(rewardBalance)} GRT
+              Maximum: {formatCurrency(rewardBalance)} RISE
             </p>
           </div>
 
