@@ -202,7 +202,7 @@ function App() {
                         <Route path="my-referrals" element={<MyReferrals />} />
                         <Route path="my-tree" element={<MyTree />} />
                         <Route path="deposit" element={<Deposit />} />
-                        <Route path="withdraw" element={<Withdraw />} />
+                        <Route path="withdrawal" element={<Withdraw />} />
                         <Route path="balance-transfer" element={<BalanceTransfer />} />
                         <Route path="epin-recharge" element={<EPinRecharge />} />
                         <Route path="transactions" element={<Transactions />} />

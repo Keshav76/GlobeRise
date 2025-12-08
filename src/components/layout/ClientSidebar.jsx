@@ -44,7 +44,7 @@ const ClientSidebar = () => {
     { icon: FaTrophy, label: "Ranking", path: ROUTES.CLIENT_RANKING },
     { icon: FaUsers, label: "My Team", path: ROUTES.CLIENT_MY_TEAM },
     { icon: FaGift, label: "Rewards", path: "/client/rewards" },
-    { icon: FaPiggyBank, label: "Withdraw", path: ROUTES.CLIENT_WITHDRAW },
+    { icon: FaPiggyBank, label: "Withdrawal", path: ROUTES.CLIENT_WITHDRAW },
     { icon: FaHistory, label: "Transaction History", path: "/client/transaction-history" },
     { icon: FaBook, label: "Rules", path: "/client/rules" },
     { icon: FaFileAlt, label: "Reports", path: ROUTES.CLIENT_REPORTS },
@@ -73,10 +73,9 @@ const ClientSidebar = () => {
                 key={item.label}
                 to={item.path}
                 className={({ isActive }) =>
-                  `flex items-center space-x-3 px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
-                    isActive
-                      ? "bg-[#00ADB5]/10 text-[#00ADB5]"
-                      : "text-gray-300 hover:bg-[#393E46]"
+                  `flex items-center space-x-3 px-4 py-3 text-sm font-medium rounded-lg transition-colors ${isActive
+                    ? "bg-[#00ADB5]/10 text-[#00ADB5]"
+                    : "text-gray-300 hover:bg-[#393E46]"
                   }`
                 }
               >
