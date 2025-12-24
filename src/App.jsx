@@ -16,6 +16,8 @@ import ResetPassword from './pages/auth/ResetPassword';
 import VerifyEmail from './pages/auth/VerifyEmail';
 import ResendEmail from './pages/auth/ResendEmail';
 import TwoFactorAuth from './pages/auth/TwoFactorAuth';
+import GoogleCallback from './pages/auth/GoogleCallback';
+import GoogleOAuthRedirect from './pages/auth/GoogleOAuthRedirect';
 
 // Admin pages
 import AdminDashboard from './pages/admin/Dashboard';
@@ -120,10 +122,13 @@ function App() {
               <Route path={ROUTES.LOGIN} element={<Login />} />
               <Route path={ROUTES.REGISTER} element={<Register />} />
               <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
-              <Route path={`${ROUTES.RESET_PASSWORD}/:token`} element={<ResetPassword />} />
-              <Route path={`${ROUTES.VERIFY_EMAIL}/:token`} element={<VerifyEmail />} />
+              <Route path={ROUTES.RESET_PASSWORD} element={<ResetPassword />} />
+              <Route path={ROUTES.VERIFY_EMAIL} element={<VerifyEmail />} />
               <Route path={ROUTES.RESEND_EMAIL} element={<ResendEmail />} />
               <Route path={ROUTES.TWO_FA} element={<TwoFactorAuth />} />
+              <Route path={ROUTES.AUTH_CALLBACK} element={<GoogleCallback />} />
+              {/* Handle Google OAuth callback if misconfigured to point to frontend */}
+              <Route path="/auth/google/callback" element={<GoogleOAuthRedirect />} />
 
               {/* Admin routes */}
               <Route

@@ -14,6 +14,7 @@ export const ROUTES = {
   VERIFY_EMAIL: '/verify-email',
   RESEND_EMAIL: '/resend-email',
   TWO_FA: '/2fa-verify',
+  AUTH_CALLBACK: '/auth/callback',
   
   // Admin routes
   ADMIN_DASHBOARD: '/admin/dashboard',
