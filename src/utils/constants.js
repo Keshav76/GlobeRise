@@ -69,6 +69,9 @@ export const ROUTES = {
   ADMIN_PLANS_ROI: '/admin/plans/roi',
   ADMIN_PLANS_STAKING: '/admin/plans/staking',
   ADMIN_USERS_UNINVESTED: '/admin/users/uninvested',
+  ADMIN_USERS_LAST_ACTIVITY: '/admin/users/last-activity',
+  ADMIN_USERS_PENDING_ACTIVITY: '/admin/users/pending-activity',
+  ADMIN_USERS_BY_LOCATION: '/admin/users/by-location',
   
   // Client routes
   CLIENT_DASHBOARD: '/client/dashboard',

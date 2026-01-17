@@ -88,6 +88,9 @@ const Sidebar = () => {
           badge: 117,
         },
         { label: "Paid Users", path: ROUTES.ADMIN_USERS_PAID },
+        { label: "Users By Last Activity", path: ROUTES.ADMIN_USERS_LAST_ACTIVITY },
+        { label: "Users By Pending Activity", path: ROUTES.ADMIN_USERS_PENDING_ACTIVITY },
+        { label: "Users By Location", path: ROUTES.ADMIN_USERS_BY_LOCATION },
         { label: "All Users", path: ROUTES.ADMIN_USERS_ALL },
         {
           label: "Send Notification",

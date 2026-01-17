@@ -32,6 +32,26 @@ const getCountryByName = (name) => {
   return countries[name] || { code: 'US', name: 'United States' };
 };
 
+// Helper function to get rank based on totalBV
+const getRankByBV = (totalBV) => {
+  if (totalBV >= 8500000) return 'IMPERATOR';
+  if (totalBV >= 7000000) return 'SUPREME LEADER';
+  if (totalBV >= 5500000) return 'EMPEROR';
+  if (totalBV >= 4000000) return 'KING';
+  if (totalBV >= 2500000) return 'CROWN PRINCE';
+  if (totalBV >= 1500000) return 'LEGEND';
+  if (totalBV >= 1000000) return 'GRANDMASTER';
+  if (totalBV >= 500000) return 'TRAILBLAZER';
+  if (totalBV >= 350000) return 'STRATEGIST';
+  if (totalBV >= 200000) return 'COMMANDER';
+  if (totalBV >= 100000) return 'CHAMPION';
+  if (totalBV >= 40000) return 'NAVIGATOR';
+  if (totalBV >= 15000) return 'CHALLENGER';
+  if (totalBV >= 5000) return 'PATHFINDER';
+  if (totalBV > 0) return 'EXPLORER';
+  return 'NONE';
+};
+
 export const mockUsers = [
   {
     id: '1',
@@ -51,14 +71,16 @@ export const mockUsers = [
     status: 'active',
     userType: 'free',
     createdAt: '2024-01-01T10:00:00',
-    balance: 0,
-    totalDeposited: 0,
-    totalWithdrawn: 0,
-    totalInvest: 0,
-    totalReferralCommission: 0,
-    totalBinaryCommission: 0,
-    totalBV: 0,
-    transactions: 0,
+    balance: 15000.00,
+    totalDeposited: 50000.00,
+    totalWithdrawn: 35000.00,
+    totalInvest: 15000.00,
+    totalReferralCommission: 2500.00,
+    totalBinaryCommission: 1500.00,
+    totalBV: 2500000,
+    transactions: 45,
+    rank: 'CROWN PRINCE',
+    leaderId: null,
     country: 'United States',
     countryCode: 'US',
     address: '',
@@ -84,14 +106,16 @@ export const mockUsers = [
     status: 'active',
     userType: 'free',
     createdAt: '2025-11-01T17:28:00',
-    balance: 2.00,
-    totalDeposited: 2.00,
-    totalWithdrawn: 0.00,
-    totalInvest: 0.00,
-    totalReferralCommission: 0.00,
-    totalBinaryCommission: 0.00,
-    totalBV: 0,
-    transactions: 1,
+    balance: 1250.50,
+    totalDeposited: 2500.00,
+    totalWithdrawn: 1249.50,
+    totalInvest: 1000.00,
+    totalReferralCommission: 50.00,
+    totalBinaryCommission: 25.00,
+    totalBV: 15000,
+    transactions: 8,
+    rank: 'CHALLENGER',
+    leaderId: '1',
     country: 'Afghanistan',
     countryCode: 'AF',
     address: '',
@@ -117,14 +141,16 @@ export const mockUsers = [
     status: 'active',
     userType: 'free',
     createdAt: '2025-11-01T17:27:00',
-    balance: 100.00,
-    totalDeposited: 100.00,
-    totalWithdrawn: 0.00,
-    totalInvest: 0.00,
-    totalReferralCommission: 0.00,
-    totalBinaryCommission: 0.00,
-    totalBV: 0,
-    transactions: 1,
+    balance: 3500.75,
+    totalDeposited: 8000.00,
+    totalWithdrawn: 4499.25,
+    totalInvest: 3500.00,
+    totalReferralCommission: 150.00,
+    totalBinaryCommission: 80.00,
+    totalBV: 50000,
+    transactions: 12,
+    rank: 'NAVIGATOR',
+    leaderId: '1',
     country: 'Afghanistan',
     countryCode: 'AF',
     address: '',
@@ -143,10 +169,10 @@ export const mockUsers = [
     lastName: 'Supernigga30',
     mobile: '+57123456789',
     mobileCountryCode: '+57',
-    emailVerified: true,
+    emailVerified: false,
     mobileVerified: true,
     twoFactorEnabled: false,
-    kycStatus: 'verified',
+    kycStatus: 'pending',
     status: 'active',
     userType: 'free',
     createdAt: '2025-10-24T16:47:00',
@@ -158,6 +184,8 @@ export const mockUsers = [
     totalBinaryCommission: 0.00,
     totalBV: 0,
     transactions: 0,
+    rank: 'NONE',
+    leaderId: null,
     country: 'Colombia',
     countryCode: 'CO',
     address: '',
@@ -183,14 +211,16 @@ export const mockUsers = [
     status: 'active',
     userType: 'paid',
     createdAt: '2024-01-15T10:00:00',
-    balance: 5000.00,
-    totalDeposited: 10000.00,
-    totalWithdrawn: 5000.00,
-    totalInvest: 5000.00,
-    totalReferralCommission: 500.00,
-    totalBinaryCommission: 300.00,
-    totalBV: 50000,
-    transactions: 25,
+    balance: 12500.00,
+    totalDeposited: 50000.00,
+    totalWithdrawn: 37500.00,
+    totalInvest: 25000.00,
+    totalReferralCommission: 2500.00,
+    totalBinaryCommission: 1500.00,
+    totalBV: 5500000,
+    transactions: 50,
+    rank: 'EMPEROR',
+    leaderId: null,
     country: 'United States',
     countryCode: 'US',
     address: '123 Main St',
@@ -212,11 +242,55 @@ for (let i = 6; i <= 1281; i++) {
   const country = getRandomCountry();
   const firstName = `User${i}`;
   const lastName = `Last${i}`;
-  const balance = Math.random() * 10000;
-  const totalDeposited = Math.random() * 20000;
-  const totalWithdrawn = Math.random() * 10000;
-  const totalInvest = Math.random() * totalDeposited;
+  
+  // Generate business volume (totalBV) with distribution favoring lower ranks
+  const bvRand = Math.random();
+  let totalBV;
+  if (bvRand < 0.15) {
+    // 15% - NONE (0 BV - new users)
+    totalBV = 0;
+  } else if (bvRand < 0.35) {
+    // 20% - EXPLORER (1-5000)
+    totalBV = Math.floor(Math.random() * 5000) + 1;
+  } else if (bvRand < 0.55) {
+    // 20% - PATHFINDER (5000-15000)
+    totalBV = Math.floor(5000 + Math.random() * 10000);
+  } else if (bvRand < 0.65) {
+    // 15% - CHALLENGER (15000-40000)
+    totalBV = Math.floor(15000 + Math.random() * 25000);
+  } else if (bvRand < 0.75) {
+    // 10% - NAVIGATOR (40000-100000)
+    totalBV = Math.floor(40000 + Math.random() * 60000);
+  } else if (bvRand < 0.85) {
+    // 10% - CHAMPION to COMMANDER (100000-350000)
+    totalBV = Math.floor(100000 + Math.random() * 250000);
+  } else if (bvRand < 0.92) {
+    // 7% - STRATEGIST to TRAILBLAZER (350000-1000000)
+    totalBV = Math.floor(350000 + Math.random() * 650000);
+  } else if (bvRand < 0.97) {
+    // 5% - GRANDMASTER to LEGEND (1000000-2500000)
+    totalBV = Math.floor(1000000 + Math.random() * 1500000);
+  } else if (bvRand < 0.99) {
+    // 2% - CROWN PRINCE to KING (2500000-5500000)
+    totalBV = Math.floor(2500000 + Math.random() * 3000000);
+  } else {
+    // 1% - EMPEROR to IMPERATOR (5500000+)
+    totalBV = Math.floor(5500000 + Math.random() * 5000000);
+  }
+  
+  // Calculate rank based on totalBV
+  const rank = getRankByBV(totalBV);
+  
+  // Generate balance and deposits proportional to rank
+  const balance = Math.random() * (totalBV * 0.1) + (totalBV * 0.05); // 5-15% of BV
+  const totalDeposited = totalBV + (Math.random() * totalBV * 0.3); // BV plus some margin
+  const totalWithdrawn = Math.random() * (totalDeposited * 0.7);
+  const totalInvest = Math.random() * totalDeposited * 0.8;
   const transactions = Math.floor(Math.random() * 50);
+  
+  // Assign leader (referrer) - 70% have a leader
+  const hasLeader = Math.random() > 0.3;
+  const leaderId = hasLeader && i > 6 ? String(Math.floor(Math.random() * (i - 1)) + 1) : null;
   
   // Generate a random date within the last year
   const daysAgo = Math.floor(Math.random() * 365);
@@ -247,7 +321,9 @@ for (let i = 6; i <= 1281; i++) {
     totalInvest: parseFloat(totalInvest.toFixed(2)),
     totalReferralCommission: parseFloat((Math.random() * 1000).toFixed(2)),
     totalBinaryCommission: parseFloat((Math.random() * 500).toFixed(2)),
-    totalBV: Math.floor(Math.random() * 100000),
+    totalBV: Math.floor(totalBV),
+    rank,
+    leaderId,
     transactions,
     country: country.name,
     countryCode: country.code,

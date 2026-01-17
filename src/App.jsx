@@ -32,6 +32,9 @@ import AllUsers from './pages/admin/users/AllUsers';
 import UserDetails from './pages/admin/users/UserDetails';
 import UserTree from './pages/admin/users/UserTree';
 import SendNotification from './pages/admin/users/SendNotification';
+import UsersByLastActivity from './pages/admin/users/UsersByLastActivity';
+import UsersByPendingActivity from './pages/admin/users/UsersByPendingActivity';
+import UsersByLocation from './pages/admin/users/UsersByLocation';
 import PendingDeposits from './pages/admin/deposits/PendingDeposits';
 import ApprovedDeposits from './pages/admin/deposits/ApprovedDeposits';
 import SuccessfulDeposits from './pages/admin/deposits/SuccessfulDeposits';
@@ -142,6 +145,9 @@ function App() {
                           <Route path="users/kyc-pending" element={<KYCPending />} />
                           <Route path="users/paid" element={<PaidUsers />} />
                           <Route path="users/all" element={<AllUsers />} />
+                          <Route path="users/last-activity" element={<UsersByLastActivity />} />
+                          <Route path="users/pending-activity" element={<UsersByPendingActivity />} />
+                          <Route path="users/by-location" element={<UsersByLocation />} />
                           <Route path="users/details/:id" element={<UserDetails />} />
                           <Route path="users/tree/:id" element={<UserTree />} />
                           <Route path="users/send-notification" element={<SendNotification />} />

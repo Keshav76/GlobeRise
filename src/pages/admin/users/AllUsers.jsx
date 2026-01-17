@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaSearch, FaFileAlt } from 'react-icons/fa';
+import { FaSearch, FaFileAlt, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { userService } from '../../../services/userService';
 import { formatCurrency, formatDateWithRelative } from '../../../utils/formatters';
 import Loading from '../../../components/common/Loading';
 import Button from '../../../components/common/Button';
+import UserFilters from '../../../components/admin/UserFilters';
 
 const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
   const navigate = useNavigate();
@@ -12,10 +13,26 @@ const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [filters, setFilters] = useState({
+    rank: null,
+    leaderId: null,
+    status: 'all',
+    emailVerified: 'all',
+    phoneVerified: 'all',
+    hasPendingWithdrawal: null,
+    hasPendingInvestment: null,
+    lastWithdrawalDateFrom: null,
+    lastWithdrawalDateTo: null,
+    lastInvestmentDateFrom: null,
+    lastInvestmentDateTo: null,
+    country: null,
+    dateFrom: null,
+    dateTo: null
+  });
 
   useEffect(() => {
     loadUsers();
-  }, [loadUsersFn]);
+  }, [filters, loadUsersFn]);
 
   useEffect(() => {
     filterUsers();
@@ -23,8 +40,22 @@ const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
 
   const loadUsers = async () => {
     try {
-      const loadFn = loadUsersFn || userService.getAllUsers;
-      const data = await loadFn();
+      setLoading(true);
+      // If loadUsersFn is provided, try to pass filters to it
+      // Otherwise, use getAllUsers with filters
+      let data;
+      if (loadUsersFn) {
+        // Check if the function accepts filters parameter
+        if (loadUsersFn.length > 0) {
+          data = await loadUsersFn(filters);
+        } else {
+          data = await loadUsersFn();
+          // Apply client-side filtering for mock data functions
+          data = applyClientSideFilters(data);
+        }
+      } else {
+        data = await userService.getAllUsers(filters);
+      }
       setUsers(data);
       setFilteredUsers(data);
     } catch (error) {
@@ -32,6 +63,50 @@ const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Apply client-side filters for mock data functions
+  const applyClientSideFilters = (userList) => {
+    let filtered = [...userList];
+
+    if (filters.rank) {
+      filtered = filtered.filter(u => u.rank === filters.rank);
+    }
+    if (filters.leaderId) {
+      filtered = filtered.filter(u => u.leaderId === filters.leaderId);
+    }
+    if (filters.status && filters.status !== 'all') {
+      if (filters.status === 'active') {
+        filtered = filtered.filter(u => u.status === 'active');
+      } else if (filters.status === 'inactive') {
+        filtered = filtered.filter(u => u.status !== 'active');
+      }
+    }
+    if (filters.emailVerified && filters.emailVerified !== 'all') {
+      if (filters.emailVerified === 'verified') {
+        filtered = filtered.filter(u => u.emailVerified);
+      } else {
+        filtered = filtered.filter(u => !u.emailVerified);
+      }
+    }
+    if (filters.phoneVerified && filters.phoneVerified !== 'all') {
+      if (filters.phoneVerified === 'verified') {
+        filtered = filtered.filter(u => u.mobileVerified);
+      } else {
+        filtered = filtered.filter(u => !u.mobileVerified);
+      }
+    }
+    if (filters.country) {
+      filtered = filtered.filter(u => u.country === filters.country || u.countryCode === filters.country);
+    }
+    if (filters.hasPendingWithdrawal === true) {
+      filtered = filtered.filter(u => u.hasPendingWithdrawal === true);
+    }
+    if (filters.hasPendingInvestment === true) {
+      filtered = filtered.filter(u => u.hasActiveInvestment === true);
+    }
+
+    return filtered;
   };
 
   const filterUsers = () => {
@@ -52,6 +127,29 @@ const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
     setFilteredUsers(filtered);
   };
 
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
+  };
+
+  const handleClearFilters = () => {
+    setFilters({
+      rank: null,
+      leaderId: null,
+      status: 'all',
+      emailVerified: 'all',
+      phoneVerified: 'all',
+      hasPendingWithdrawal: null,
+      hasPendingInvestment: null,
+      lastWithdrawalDateFrom: null,
+      lastWithdrawalDateTo: null,
+      lastInvestmentDateFrom: null,
+      lastInvestmentDateTo: null,
+      country: null,
+      dateFrom: null,
+      dateTo: null
+    });
+  };
+
   const handleDetailsClick = (userId) => {
     navigate(`/admin/users/details/${userId}`);
   };
@@ -65,6 +163,13 @@ const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
 
   return (
     <div>
+      {/* Filters Component - Always show filters */}
+      <UserFilters
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        onClearFilters={handleClearFilters}
+      />
+
       <div className="bg-[var(--card-bg)] rounded-lg shadow-md border border-[var(--border-color)] p-6">
         {/* Header with Search */}
         <div className="flex justify-between items-center mb-6">
@@ -96,7 +201,16 @@ const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
                   User
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">
+                  Rank
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">
+                  Leader
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">
                   Email-Mobile
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">
+                  Verification
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">
                   Country
@@ -115,7 +229,7 @@ const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
             <tbody className="bg-[var(--card-bg)] divide-y divide-[var(--border-color)]">
               {filteredUsers.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-4 text-center text-[var(--text-tertiary)]">
+                  <td colSpan={9} className="px-6 py-4 text-center text-[var(--text-tertiary)]">
                     No users found
                   </td>
                 </tr>
@@ -126,23 +240,62 @@ const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
                     <tr key={user.id} className={`hover:bg-[var(--bg-hover)] ${index % 2 === 0 ? 'bg-[var(--card-bg)]' : 'bg-[var(--bg-secondary)]'}`}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-[var(--text-primary)]">
-                          <div className="font-medium">{user.name || `${user.firstName || ''} ${user.lastName || ''}`.trim()}</div>
-                          <div className="text-[var(--text-tertiary)]">@{user.username}</div>
+                          <div className="font-medium">{user.name || `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.email}</div>
+                          <div className="text-[var(--text-tertiary)]">@{user.username || 'N/A'}</div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm">
+                          <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs font-medium">
+                            {user.rank || 'NONE'}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-[var(--text-primary)]">
+                          {user.leader ? (
+                            <div>
+                              <div className="font-medium">{user.leader.name || user.leader.email}</div>
+                              <div className="text-[var(--text-tertiary)] text-xs">{user.leader.email}</div>
+                            </div>
+                          ) : (
+                            <span className="text-[var(--text-tertiary)]">N/A</span>
+                          )}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-[var(--text-primary)]">
                           <div>{user.email || 'N/A'}</div>
-                          <div>{user.mobile || 'N/A'}</div>
+                          <div className="text-[var(--text-tertiary)]">{user.mobile || 'N/A'}</div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-[var(--text-primary)]">{user.countryCode || 'N/A'}</div>
+                        <div className="flex items-center space-x-3 text-sm">
+                          <div className="flex items-center space-x-1" title={user.emailVerified ? 'Email Verified' : 'Email Not Verified'}>
+                            {user.emailVerified ? (
+                              <FaCheckCircle className="text-green-500" />
+                            ) : (
+                              <FaTimesCircle className="text-red-500" />
+                            )}
+                            <span className="text-[var(--text-tertiary)] text-xs">Email</span>
+                          </div>
+                          <div className="flex items-center space-x-1" title={user.mobileVerified ? 'Mobile Verified' : 'Mobile Not Verified'}>
+                            {user.mobileVerified ? (
+                              <FaCheckCircle className="text-green-500" />
+                            ) : (
+                              <FaTimesCircle className="text-red-500" />
+                            )}
+                            <span className="text-[var(--text-tertiary)] text-xs">Mobile</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-[var(--text-primary)]">{user.country || user.countryCode || 'N/A'}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-[var(--text-primary)]">
-                          <div>{dateInfo.dateTime || user.createdAt}</div>
-                          <div className="text-[var(--text-tertiary)]">{dateInfo.relative || (user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A')}</div>
+                          <div>{dateInfo.dateTime || (user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A')}</div>
+                          <div className="text-[var(--text-tertiary)] text-xs">{dateInfo.relative || ''}</div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
