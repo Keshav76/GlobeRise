@@ -6,6 +6,7 @@ import Loading from '../../../components/common/Loading';
 import Modal from '../../../components/common/Modal';
 import Button from '../../../components/common/Button';
 import { useAuth } from '../../../hooks/useAuth';
+import ExportButtons from '../../../components/common/ExportButtons';
 
 const AllPins = ({ filterType = 'all', filterStatus = null }) => {
   const { user } = useAuth();
@@ -29,6 +30,16 @@ const AllPins = ({ filterType = 'all', filterStatus = null }) => {
     if (filterType === 'admin') return 'Admin Pins';
     return 'All Pins';
   };
+
+  // Define columns for export
+  const exportColumns = [
+    { header: 'Created By', accessor: 'createdBy' },
+    { header: 'Amount', accessor: 'amount' },
+    { header: 'Pin', accessor: 'pin' },
+    { header: 'Status', accessor: 'status' },
+    { header: 'Created At', accessor: 'createdAt' },
+    { header: 'Used At', accessor: 'usedAt' },
+  ];
 
   useEffect(() => {
     loadPins();
@@ -124,6 +135,13 @@ const AllPins = ({ filterType = 'all', filterStatus = null }) => {
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-3xl font-bold text-[var(--text-primary)]">{getTitle()}</h1>
           <div className="flex items-center gap-3">
+            {/* Export Buttons */}
+            <ExportButtons
+              data={filteredPins}
+              columns={exportColumns}
+              filename={getTitle().toLowerCase().replace(/\s+/g, '_')}
+              title={getTitle()}
+            />
             {/* Search Bar */}
             <div className="flex items-center gap-2">
               <input

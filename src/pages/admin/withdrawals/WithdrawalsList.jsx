@@ -4,6 +4,7 @@ import { FaSearch, FaDesktop } from 'react-icons/fa';
 import { withdrawalService } from '../../../services/withdrawalService';
 import { formatCurrency, formatDateWithRelative } from '../../../utils/formatters';
 import Loading from '../../../components/common/Loading';
+import ExportButtons from '../../../components/common/ExportButtons';
 
 const WithdrawalsList = ({ status, title }) => {
   const navigate = useNavigate();
@@ -155,6 +156,19 @@ const WithdrawalsList = ({ status, title }) => {
     'Custom Range'
   ];
 
+  // Define columns for export
+  const exportColumns = [
+    { header: 'Transaction ID', accessor: 'transactionId' },
+    { header: 'Gateway', accessor: 'gateway' },
+    { header: 'Username', accessor: 'username' },
+    { header: 'User Name', accessor: 'userName' },
+    { header: 'Amount', accessor: 'amount' },
+    { header: 'Charge', accessor: 'charge' },
+    { header: 'After Charge', accessor: 'afterCharge' },
+    { header: 'Status', accessor: 'status' },
+    { header: 'Created At', accessor: 'createdAt' },
+  ];
+
   return (
     <div className="min-h-screen bg-[var(--bg-secondary)] p-6">
       <div className="max-w-7xl mx-auto">
@@ -164,6 +178,12 @@ const WithdrawalsList = ({ status, title }) => {
           
           {/* Search and Filter Bar */}
           <div className="flex gap-3">
+            <ExportButtons
+              data={filteredWithdrawals}
+              columns={exportColumns}
+              filename={(title || 'withdrawals').toLowerCase().replace(/\s+/g, '_')}
+              title={title || 'Withdrawals'}
+            />
             {/* Username/TRX Search */}
             <div className="relative">
               <input

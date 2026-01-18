@@ -6,6 +6,7 @@ import { formatCurrency, formatDateWithRelative } from '../../../utils/formatter
 import Loading from '../../../components/common/Loading';
 import Button from '../../../components/common/Button';
 import UserFilters from '../../../components/admin/UserFilters';
+import ExportButtons from '../../../components/common/ExportButtons';
 
 const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
   const navigate = useNavigate();
@@ -159,6 +160,20 @@ const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
     filterUsers();
   };
 
+  // Define columns for export
+  const exportColumns = [
+    { header: 'Username', accessor: 'username' },
+    { header: 'Name', accessor: 'name' },
+    { header: 'Email', accessor: 'email' },
+    { header: 'Mobile', accessor: 'mobile' },
+    { header: 'Rank', accessor: 'rank' },
+    { header: 'Country', accessor: 'country' },
+    { header: 'Balance', accessor: 'balance' },
+    { header: 'Email Verified', accessor: 'emailVerified' },
+    { header: 'Mobile Verified', accessor: 'mobileVerified' },
+    { header: 'Joined At', accessor: 'createdAt' },
+  ];
+
   if (loading) return <Loading size="lg" />;
 
   return (
@@ -174,22 +189,30 @@ const AllUsers = ({ loadUsersFn, title = 'All Users' }) => {
         {/* Header with Search */}
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-[var(--text-primary)]">{title}</h1>
-          <form onSubmit={handleSearch} className="flex items-center space-x-2">
-            <input
-              type="text"
-              placeholder="Username / Email"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="px-4 py-2 border border-[var(--border-color)] bg-[var(--input-bg)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ADB5] text-[var(--text-primary)] placeholder-[var(--text-tertiary)]"
+          <div className="flex items-center space-x-3">
+            <ExportButtons
+              data={filteredUsers}
+              columns={exportColumns}
+              filename={title.toLowerCase().replace(/\s+/g, '_')}
+              title={title}
             />
-            <Button
-              type="submit"
-              variant="primary"
-              className="px-4 py-2 flex items-center space-x-2"
-            >
-              <FaSearch />
-            </Button>
-          </form>
+            <form onSubmit={handleSearch} className="flex items-center space-x-2">
+              <input
+                type="text"
+                placeholder="Username / Email"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="px-4 py-2 border border-[var(--border-color)] bg-[var(--input-bg)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ADB5] text-[var(--text-primary)] placeholder-[var(--text-tertiary)]"
+              />
+              <Button
+                type="submit"
+                variant="primary"
+                className="px-4 py-2 flex items-center space-x-2"
+              >
+                <FaSearch />
+              </Button>
+            </form>
+          </div>
         </div>
 
         {/* Table */}

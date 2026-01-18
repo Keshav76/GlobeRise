@@ -6,6 +6,7 @@ import { adminRoleService } from '../../../services/adminRoleService';
 import Loading from '../../../components/common/Loading';
 import { FEATURES, ACCESS } from '../../../utils/permissions';
 import PermissionGuard from '../../../components/auth/PermissionGuard';
+import ExportButtons from '../../../components/common/ExportButtons';
 
 const featureLabels = {
   [FEATURES.USERS]: 'Users',
@@ -66,20 +67,35 @@ const ManageAdmins = () => {
     },
   ];
 
+  // Export columns
+  const exportColumns = [
+    { header: 'Email', accessor: 'email' },
+    { header: 'Role', accessor: 'roleName' },
+    { header: 'Created', accessor: 'createdAt' },
+  ];
+
   if (loading) return <Loading size="lg" />;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-[var(--text-primary)]">Manage Admins</h1>
-        <PermissionGuard feature={FEATURES.USERS} access={ACCESS.EDIT}>
-          <Button
-            variant="primary"
-            onClick={() => (window.location.href = '/admin/admins/create')}
-          >
-            Create Admin
-          </Button>
-        </PermissionGuard>
+        <div className="flex items-center gap-3">
+          <ExportButtons
+            data={admins}
+            columns={exportColumns}
+            filename="admins"
+            title="Manage Admins"
+          />
+          <PermissionGuard feature={FEATURES.USERS} access={ACCESS.EDIT}>
+            <Button
+              variant="primary"
+              onClick={() => (window.location.href = '/admin/admins/create')}
+            >
+              Create Admin
+            </Button>
+          </PermissionGuard>
+        </div>
       </div>
       <Card>
         <Table columns={columns} data={admins} />

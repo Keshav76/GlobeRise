@@ -4,6 +4,7 @@ import { formatDate } from '../../utils/formatters';
 import { useState, useEffect } from 'react';
 import { delay } from '../../utils/helpers';
 import Loading from '../../components/common/Loading';
+import ExportButtons from '../../components/common/ExportButtons';
 
 const Subscribers = () => {
   const [subscribers, setSubscribers] = useState([]);
@@ -29,11 +30,26 @@ const Subscribers = () => {
     )},
   ];
 
+  // Export columns
+  const exportColumns = [
+    { header: 'Email', accessor: 'email' },
+    { header: 'Subscribed At', accessor: 'createdAt' },
+    { header: 'Status', accessor: 'status' },
+  ];
+
   if (loading) return <Loading size="lg" />;
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-white mb-6">Subscribers</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-white">Subscribers</h1>
+        <ExportButtons
+          data={subscribers}
+          columns={exportColumns}
+          filename="subscribers"
+          title="Subscribers"
+        />
+      </div>
       <Card>
         <Table columns={columns} data={subscribers} />
       </Card>

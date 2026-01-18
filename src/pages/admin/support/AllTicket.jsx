@@ -10,6 +10,7 @@ import Alert from '../../../components/common/Alert';
 import { FaTicketAlt, FaCheckCircle, FaClock, FaTimes, FaExclamationTriangle, FaEye } from 'react-icons/fa';
 import PermissionGuard from '../../../components/auth/PermissionGuard';
 import { FEATURES, ACCESS } from '../../../utils/permissions';
+import ExportButtons from '../../../components/common/ExportButtons';
 
 const AllTicket = ({ statusFilter = null }) => {
   const [tickets, setTickets] = useState([]);
@@ -159,6 +160,17 @@ const AllTicket = ({ statusFilter = null }) => {
     ? `${statusFilter.charAt(0) + statusFilter.slice(1).toLowerCase().replace('_', ' ')} Support Tickets`
     : 'All Support Tickets';
 
+  // Export columns
+  const exportColumns = [
+    { header: 'ID', accessor: 'id' },
+    { header: 'User ID', accessor: 'userId' },
+    { header: 'Subject', accessor: 'subject' },
+    { header: 'Status', accessor: 'status' },
+    { header: 'Priority', accessor: 'priority' },
+    { header: 'Category', accessor: 'category' },
+    { header: 'Created', accessor: 'createdAt' },
+  ];
+
   return (
     <PermissionGuard feature={FEATURES.SUPPORT} access={ACCESS.READ}>
       <div>
@@ -167,6 +179,12 @@ const AllTicket = ({ statusFilter = null }) => {
             <FaTicketAlt className="text-[#00ADB5]" />
             {title}
           </h1>
+          <ExportButtons
+            data={filteredTickets}
+            columns={exportColumns}
+            filename={title.toLowerCase().replace(/\s+/g, '_')}
+            title={title}
+          />
         </div>
 
         {error && <Alert type="error" message={error} />}

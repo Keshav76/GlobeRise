@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { delay } from '../../../utils/helpers';
 import Loading from '../../../components/common/Loading';
+import ExportButtons from '../../../components/common/ExportButtons';
 
 const NotificationHistory = () => {
   const [searchParams] = useSearchParams();
@@ -49,17 +50,34 @@ const NotificationHistory = () => {
     { header: 'Date', accessor: 'createdAt', render: (value) => formatDate(value) },
   ];
 
+  // Export columns
+  const exportColumns = [
+    { header: 'Username', accessor: 'username' },
+    { header: 'User ID', accessor: 'userId' },
+    { header: 'Message', accessor: 'message' },
+    { header: 'Type', accessor: 'type' },
+    { header: 'Date', accessor: 'createdAt' },
+  ];
+
   if (loading) return <Loading size="lg" />;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Notification History</h1>
-        {searchQuery && (
-          <div className="text-sm text-gray-600">
-            Filtered by: <span className="font-semibold">{searchQuery}</span>
-          </div>
-        )}
+        <div className="flex items-center gap-4">
+          {searchQuery && (
+            <div className="text-sm text-gray-600">
+              Filtered by: <span className="font-semibold">{searchQuery}</span>
+            </div>
+          )}
+          <ExportButtons
+            data={filteredNotifications}
+            columns={exportColumns}
+            filename="notification_history"
+            title="Notification History"
+          />
+        </div>
       </div>
       <Card>
         <Table columns={columns} data={filteredNotifications} />

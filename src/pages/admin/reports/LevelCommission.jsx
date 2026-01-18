@@ -4,6 +4,7 @@ import { formatCurrency, formatDate } from '../../../utils/formatters';
 import { useState, useEffect } from 'react';
 import { delay } from '../../../utils/helpers';
 import Loading from '../../../components/common/Loading';
+import ExportButtons from '../../../components/common/ExportButtons';
 
 // Frontend-only mock for level commission report
 const LevelCommission = () => {
@@ -160,11 +161,29 @@ const LevelCommission = () => {
     },
   ];
 
+  // Export columns (without render functions)
+  const exportColumns = [
+    { header: 'ID', accessor: 'id' },
+    { header: 'User', accessor: 'userName' },
+    { header: 'From User', accessor: 'fromUserName' },
+    { header: 'Level', accessor: 'level' },
+    { header: 'Amount', accessor: 'amount' },
+    { header: 'Date', accessor: 'createdAt' },
+  ];
+
   if (loading) return <Loading size="lg" />;
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Level Commission</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">Level Commission</h1>
+        <ExportButtons
+          data={commissions}
+          columns={exportColumns}
+          filename="level_commission"
+          title="Level Commission"
+        />
+      </div>
       <Card>
         <Table columns={columns} data={commissions} />
       </Card>

@@ -5,6 +5,7 @@ import Modal from '../../../components/common/Modal';
 import { rankingService } from '../../../services/rankingService';
 import { formatCurrency } from '../../../utils/formatters';
 import Loading from '../../../components/common/Loading';
+import ExportButtons from '../../../components/common/ExportButtons';
 
 const UserRanking = () => {
   const [rankings, setRankings] = useState([]);
@@ -305,6 +306,18 @@ const UserRanking = () => {
     },
   ];
 
+  // Export columns for rankings
+  const exportColumns = [
+    { header: 'Level', accessor: 'level' },
+    { header: 'Name', accessor: 'name' },
+    { header: 'Total Team Business', accessor: 'requiredBusiness' },
+    { header: 'One Time Bonus', accessor: 'bonusAmount' },
+    { header: 'Royalty %', accessor: 'royaltyPercent' },
+    { header: 'Level Start', accessor: 'levelStartValue' },
+    { header: 'Level End', accessor: 'levelEndValue' },
+    { header: 'Status', accessor: 'status' },
+  ];
+
   if (loading) {
     return <Loading size="lg" />;
   }
@@ -313,14 +326,22 @@ const UserRanking = () => {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-black">User Rankings</h1>
-        <Button
-          variant="primary"
-          onClick={handleAddNew}
-          className="flex items-center space-x-2"
-        >
-          <FaPlus />
-          <span>Add New</span>
-        </Button>
+        <div className="flex items-center gap-3">
+          <ExportButtons
+            data={rankings}
+            columns={exportColumns}
+            filename="user_rankings"
+            title="User Rankings"
+          />
+          <Button
+            variant="primary"
+            onClick={handleAddNew}
+            className="flex items-center space-x-2"
+          >
+            <FaPlus />
+            <span>Add New</span>
+          </Button>
+        </div>
       </div>
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
