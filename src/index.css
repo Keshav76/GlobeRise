@@ -124,16 +124,16 @@ body {
   .mobile-sidebar-enter {
     transform: translateX(-100%);
   }
-  
+
   .mobile-sidebar-enter-active {
     transform: translateX(0);
     transition: transform 300ms ease-in-out;
   }
-  
+
   .mobile-sidebar-exit {
     transform: translateX(0);
   }
-  
+
   .mobile-sidebar-exit-active {
     transform: translateX(-100%);
     transition: transform 300ms ease-in-out;
@@ -214,4 +214,24 @@ html {
   -webkit-background-clip: text;
   color: transparent;
   background-image: linear-gradient(to right, #00ADB5, #14b8a6);
+}
+
+/* Scrolling Ticker Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  display: inline-block;
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
 }

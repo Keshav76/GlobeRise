@@ -14,7 +14,7 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
             </div>
 
-            <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+            <div className="container mx-auto px-8 md:px-16 lg:px-24 relative z-10 grid md:grid-cols-2 gap-12 items-center">
                 <div className="text-left space-y-8">
                     <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border" style={{ backgroundColor: '#393E46', borderColor: 'rgba(0, 173, 181, 0.3)' }}>
                         <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: '#00ADB5' }}></span>

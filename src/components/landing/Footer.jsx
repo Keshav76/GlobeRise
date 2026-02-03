@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Twitter, Linkedin, Facebook } from 'lucide-react';
 const Footer = () => {
     return (
         <footer id="contact" className="pt-16 pb-8 border-t" style={{ backgroundColor: '#393E46', borderColor: '#111827' }}>
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-8 md:px-16 lg:px-24">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
                     {/* Brand Info */}

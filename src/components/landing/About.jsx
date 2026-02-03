@@ -7,11 +7,11 @@ const About = () => {
             {/* Background elements */}
             <div className="absolute top-0 right-0 w-1/3 h-full opacity-50 z-0" style={{ background: 'linear-gradient(to left, #393E46, transparent)' }}></div>
 
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="flex flex-col md:flex-row gap-16 items-center">
+            <div className="container mx-auto px-8 md:px-16 lg:px-24 relative z-10">
+                <div className="flex flex-col lg:flex-row gap-16 items-center">
 
                     {/* Text Content */}
-                    <div className="md:w-1/2 space-y-8">
+                    <div className="lg:w-2/3 space-y-8">
                         <h2 className="text-sm font-bold tracking-widest uppercase mb-2" style={{ color: '#00ADB5' }}>Who We Are</h2>
                         <h3 className="text-4xl md:text-5xl font-bold leading-tight text-white">
                             Empowering Innovation, <span style={{ color: '#00ADB5' }}>Globally</span>.
@@ -40,7 +40,7 @@ const About = () => {
                     </div>
 
                     {/* Visual Cards */}
-                    <div className="md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="lg:w-1/3 space-y-6">
                         <div className="p-8 rounded-2xl border transition-colors group" style={{ backgroundColor: '#393E46', borderColor: '#111827' }}
                             onMouseEnter={(e) => e.currentTarget.style.borderColor = 'rgba(0, 173, 181, 0.5)'}
                             onMouseLeave={(e) => e.currentTarget.style.borderColor = '#111827'}
@@ -55,7 +55,7 @@ const About = () => {
                             <p className="text-sm px-0" style={{ color: '#9ca3af' }}>Use sustainable innovation to deliver scalable solutions that empower communities worldwide.</p>
                         </div>
 
-                        <div className="p-8 rounded-2xl border transition-colors group mt-8 sm:mt-12" style={{ backgroundColor: '#393E46', borderColor: '#111827' }}
+                        <div className="p-8 rounded-2xl border transition-colors group" style={{ backgroundColor: '#393E46', borderColor: '#111827' }}
                             onMouseEnter={(e) => e.currentTarget.style.borderColor = 'rgba(20, 184, 166, 0.5)'}
                             onMouseLeave={(e) => e.currentTarget.style.borderColor = '#111827'}
                         >
