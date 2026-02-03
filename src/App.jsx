@@ -108,6 +108,9 @@ import Notifications from './pages/client/Notifications';
 import Rewards from './pages/client/Rewards';
 import Rules from './pages/client/Rules';
 
+// Landing page
+import Landing from './pages/Landing';
+
 function App() {
   return (
     <ThemeProvider>
@@ -237,7 +240,7 @@ function App() {
               />
 
               {/* Default redirect */}
-              <Route path="/" element={<Navigate to={ROUTES.LOGIN} replace />} />
+              <Route path="/" element={<Landing />} />
             </Routes>
           </Router>
         </WalletProvider>

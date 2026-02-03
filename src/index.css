@@ -203,3 +203,15 @@ body.mobile-menu-open {
 .theme-toggle-icon.rotate {
   transform: rotate(180deg);
 }
+
+/* Landing page utilities */
+html {
+  scroll-behavior: smooth;
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #00ADB5, #14b8a6);
+}
