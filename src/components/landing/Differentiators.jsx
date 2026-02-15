@@ -38,27 +38,26 @@ const Differentiators = () => {
     return (
         <section id="differentiators" className="py-24 relative overflow-hidden">
             {/* Background Gradient */}
-            <div className="absolute inset-0 opacity-50 z-0" style={{ background: 'linear-gradient(to bottom, #222831, #393E46)' }}></div>
+            <div className="absolute inset-0 opacity-50 z-0" style={{ background: 'linear-gradient(to bottom, #f8fafc, #f1f5f9)' }}></div>
 
             <div className="container mx-auto px-8 md:px-16 lg:px-24 relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <div className="space-y-8 text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                        <h2 className="text-4xl md:text-5xl font-bold leading-tight" style={{ color: '#0f172a' }}>
                             Why Partners <span style={{ color: '#00ADB5' }}>Choose Us</span>
                         </h2>
 
-                        <p className="text-lg leading-relaxed max-w-3xl mx-auto" style={{ color: '#9ca3af' }}>
+                        <p className="text-lg leading-relaxed max-w-3xl mx-auto" style={{ color: '#64748b' }}>
                             GlobeRise brings more than just service—we bring reliability, scalability, and impact. Our unique blend of technical expertise and sustainable principles makes us the preferred partner for forward-thinking enterprises.
                         </p>
 
                         <div className="pt-4">
-                            <a href="#contact" className="inline-block px-8 py-4 font-bold rounded-lg transition-colors shadow-lg"
+                            <a href="#contact" className="inline-block px-8 py-4 font-bold rounded-lg transition-colors shadow-lg text-white"
                                 style={{
                                     backgroundColor: '#00ADB5',
-                                    color: '#222831',
                                     boxShadow: '0 10px 15px -3px rgba(0, 173, 181, 0.2)'
                                 }}
-                                onMouseEnter={(e) => e.target.style.backgroundColor = '#ffffff'}
+                                onMouseEnter={(e) => e.target.style.backgroundColor = '#0d9488'}
                                 onMouseLeave={(e) => e.target.style.backgroundColor = '#00ADB5'}
                             >
                                 Start Your Journey
@@ -69,16 +68,16 @@ const Differentiators = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                         {features.map((feature, index) => (
                             <div key={index} className="flex flex-col items-center text-center p-6 rounded-xl border transition-colors"
-                                style={{ backgroundColor: '#222831', borderColor: '#111827' }}
-                                onMouseEnter={(e) => e.currentTarget.style.borderColor = '#4b5563'}
-                                onMouseLeave={(e) => e.currentTarget.style.borderColor = '#111827'}
+                                style={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.06)' }}
+                                onMouseEnter={(e) => e.currentTarget.style.borderColor = '#cbd5e1'}
+                                onMouseLeave={(e) => e.currentTarget.style.borderColor = '#e2e8f0'}
                             >
-                                <div className="mb-4 p-2 rounded-lg" style={{ backgroundColor: '#1f2937' }}>
+                                <div className="mb-4 p-2 rounded-lg" style={{ backgroundColor: '#f1f5f9' }}>
                                     {feature.icon}
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
-                                    <p className="text-sm" style={{ color: '#9ca3af' }}>{feature.description}</p>
+                                    <h3 className="text-lg font-bold mb-2" style={{ color: '#0f172a' }}>{feature.title}</h3>
+                                    <p className="text-sm" style={{ color: '#64748b' }}>{feature.description}</p>
                                 </div>
                             </div>
                         ))}

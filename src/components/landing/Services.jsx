@@ -40,7 +40,7 @@ const Services = () => {
             icon: <Coins className="w-8 h-8" />,
             title: "Crypto Infrastructure",
             description: "Mining advisory, blockchain node management, and institutional integration.",
-            color: "#facc15"
+            color: "#eab308"
         },
         {
             icon: <Building className="w-8 h-8" />,
@@ -112,12 +112,12 @@ const Services = () => {
     };
 
     return (
-        <section id="services" className="py-24 relative" style={{ backgroundColor: '#222831' }}>
+        <section id="services" className="py-24 relative" style={{ backgroundColor: '#f1f5f9' }}>
             <div className="container mx-auto px-8 md:px-16 lg:px-24">
                 <div className="text-center mb-16 space-y-4">
                     <span className="font-bold tracking-wider uppercase text-sm" style={{ color: '#00ADB5' }}>Our Expertise</span>
-                    <h2 className="text-4xl md:text-5xl font-bold text-white">Core <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(to right, #00ADB5, #14b8a6)' }}>Capabilities</span></h2>
-                    <p className="max-w-2xl mx-auto" style={{ color: '#9ca3af' }}>
+                    <h2 className="text-4xl md:text-5xl font-bold" style={{ color: '#0f172a' }}>Core <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(to right, #00ADB5, #14b8a6)' }}>Capabilities</span></h2>
+                    <p className="max-w-2xl mx-auto" style={{ color: '#64748b' }}>
                         Delivering practical, future-focused services across 10 strategic domains to drive global innovation.
                     </p>
                 </div>
@@ -149,22 +149,22 @@ const Services = () => {
                                     <div
                                         className="p-8 border rounded-2xl transition-all duration-300 h-full"
                                         style={{
-                                            backgroundColor: '#393E46',
-                                            borderColor: (isCentered || isHovered) ? 'rgba(0, 173, 181, 0.5)' : '#111827',
-                                            boxShadow: (isCentered || isHovered) ? '0 10px 30px -10px rgba(0, 173, 181, 0.2)' : 'none'
+                                            backgroundColor: '#ffffff',
+                                            borderColor: (isCentered || isHovered) ? 'rgba(0, 173, 181, 0.4)' : '#e2e8f0',
+                                            boxShadow: (isCentered || isHovered) ? '0 10px 30px -10px rgba(0, 173, 181, 0.15)' : '0 1px 3px rgba(0, 0, 0, 0.06)'
                                         }}
                                     >
-                                        <div className="mb-6 p-4 rounded-xl w-fit transition-colors duration-300" style={{ backgroundColor: (isCentered || isHovered) ? '#222831' : 'rgba(17, 24, 39, 0.5)' }}>
+                                        <div className="mb-6 p-4 rounded-xl w-fit transition-colors duration-300" style={{ backgroundColor: (isCentered || isHovered) ? '#f1f5f9' : '#f8fafc' }}>
                                             <div className="transition-transform duration-300" style={{ color: service.color, transform: (isCentered || isHovered) ? 'scale(1.1)' : 'scale(1)' }}>
                                                 {service.icon}
                                             </div>
                                         </div>
 
-                                        <h3 className="text-xl font-bold mb-3 transition-colors" style={{ color: (isCentered || isHovered) ? '#00ADB5' : '#ffffff' }}>
+                                        <h3 className="text-xl font-bold mb-3 transition-colors" style={{ color: (isCentered || isHovered) ? '#00ADB5' : '#0f172a' }}>
                                             {service.title}
                                         </h3>
 
-                                        <p className="text-sm leading-relaxed mb-6" style={{ color: '#9ca3af' }}>
+                                        <p className="text-sm leading-relaxed mb-6" style={{ color: '#64748b' }}>
                                             {service.description}
                                         </p>
                                     </div>
@@ -177,18 +177,18 @@ const Services = () => {
                     <button
                         onClick={prevSlide}
                         className="absolute left-0 top-1/2 -translate-y-1/2 p-3 rounded-full transition-all"
-                        style={{ backgroundColor: '#393E46', color: '#00ADB5' }}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#00ADB5'}
-                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#393E46'}
+                        style={{ backgroundColor: '#ffffff', color: '#00ADB5', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)' }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#00ADB5'; e.currentTarget.style.color = '#ffffff'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.color = '#00ADB5'; }}
                     >
                         <ChevronLeft className="w-6 h-6" />
                     </button>
                     <button
                         onClick={nextSlide}
                         className="absolute right-0 top-1/2 -translate-y-1/2 p-3 rounded-full transition-all"
-                        style={{ backgroundColor: '#393E46', color: '#00ADB5' }}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#00ADB5'}
-                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#393E46'}
+                        style={{ backgroundColor: '#ffffff', color: '#00ADB5', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)' }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#00ADB5'; e.currentTarget.style.color = '#ffffff'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.color = '#00ADB5'; }}
                     >
                         <ChevronRight className="w-6 h-6" />
                     </button>
@@ -201,7 +201,7 @@ const Services = () => {
                                 onClick={() => setCurrentIndex(index)}
                                 className="w-2 h-2 rounded-full transition-all"
                                 style={{
-                                    backgroundColor: currentIndex === index ? '#00ADB5' : '#4b5563',
+                                    backgroundColor: currentIndex === index ? '#00ADB5' : '#cbd5e1',
                                     width: currentIndex === index ? '24px' : '8px'
                                 }}
                             />
@@ -216,25 +216,25 @@ const Services = () => {
                             key={index}
                             className="group relative p-8 border rounded-2xl transition-all duration-300"
                             style={{
-                                backgroundColor: '#393E46',
-                                borderColor: hoveredIndex === index ? 'rgba(0, 173, 181, 0.5)' : '#111827',
+                                backgroundColor: '#ffffff',
+                                borderColor: hoveredIndex === index ? 'rgba(0, 173, 181, 0.4)' : '#e2e8f0',
                                 transform: hoveredIndex === index ? 'translateY(-8px)' : 'translateY(0)',
-                                boxShadow: hoveredIndex === index ? '0 10px 30px -10px rgba(0, 173, 181, 0.2)' : 'none'
+                                boxShadow: hoveredIndex === index ? '0 10px 30px -10px rgba(0, 173, 181, 0.15)' : '0 1px 3px rgba(0, 0, 0, 0.06)'
                             }}
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         >
-                            <div className="mb-6 p-4 rounded-xl w-fit transition-colors duration-300" style={{ backgroundColor: hoveredIndex === index ? '#222831' : 'rgba(17, 24, 39, 0.5)' }}>
+                            <div className="mb-6 p-4 rounded-xl w-fit transition-colors duration-300" style={{ backgroundColor: hoveredIndex === index ? '#f1f5f9' : '#f8fafc' }}>
                                 <div className="transition-transform duration-300" style={{ color: service.color, transform: hoveredIndex === index ? 'scale(1.1)' : 'scale(1)' }}>
                                     {service.icon}
                                 </div>
                             </div>
 
-                            <h3 className="text-xl font-bold mb-3 transition-colors" style={{ color: hoveredIndex === index ? '#00ADB5' : '#ffffff' }}>
+                            <h3 className="text-xl font-bold mb-3 transition-colors" style={{ color: hoveredIndex === index ? '#00ADB5' : '#0f172a' }}>
                                 {service.title}
                             </h3>
 
-                            <p className="text-sm leading-relaxed mb-6" style={{ color: '#9ca3af' }}>
+                            <p className="text-sm leading-relaxed mb-6" style={{ color: '#64748b' }}>
                                 {service.description}
                             </p>
                         </div>

@@ -8,7 +8,7 @@ import Footer from '../components/landing/Footer';
 
 function Landing() {
     return (
-        <div className="min-h-screen text-white" style={{ backgroundColor: '#222831' }}>
+        <div className="min-h-screen" style={{ backgroundColor: '#f8fafc', color: '#0f172a' }}>
             <Navbar />
             <Hero />
             <About />

@@ -33,11 +33,11 @@ const Navbar = () => {
     };
 
     return (
-        <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'}`} style={{ backgroundColor: scrolled ? 'rgba(34, 40, 49, 0.9)' : 'transparent' }}>
+        <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'}`} style={{ backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.9)' : 'transparent' }}>
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <a href="#" className="flex items-center space-x-2 group">
                     <div className="w-8 h-8 rounded-lg transform rotate-45 group-hover:rotate-0 transition-transform duration-300" style={{ background: 'linear-gradient(to top right, #00ADB5, #14b8a6)' }}></div>
-                    <span className="text-2xl font-bold font-sans tracking-tight text-white">Globe<span style={{ color: '#00ADB5' }}>Rise</span></span>
+                    <span className="text-2xl font-bold font-sans tracking-tight" style={{ color: '#0f172a' }}>Globe<span style={{ color: '#00ADB5' }}>Rise</span></span>
                 </a>
 
                 {/* Desktop Menu */}
@@ -47,23 +47,22 @@ const Navbar = () => {
                             key={link.name}
                             href={link.href}
                             className="font-medium transition-colors duration-200"
-                            style={{ color: '#9ca3af' }}
+                            style={{ color: '#64748b' }}
                             onMouseEnter={(e) => e.target.style.color = '#00ADB5'}
-                            onMouseLeave={(e) => e.target.style.color = '#9ca3af'}
+                            onMouseLeave={(e) => e.target.style.color = '#64748b'}
                         >
                             {link.name}
                         </a>
                     ))}
                     <button
                         onClick={handleLoginClick}
-                        className="px-6 py-2 font-bold rounded-full transition-all duration-300 transform hover:scale-105"
+                        className="px-6 py-2 font-bold rounded-full transition-all duration-300 transform hover:scale-105 text-white"
                         style={{
                             background: 'linear-gradient(to right, #00ADB5, #14b8a6)',
-                            color: '#222831',
-                            boxShadow: '0 0 20px rgba(0, 173, 181, 0.4)'
+                            boxShadow: '0 0 20px rgba(0, 173, 181, 0.3)'
                         }}
-                        onMouseEnter={(e) => e.target.style.boxShadow = '0 0 30px rgba(0, 173, 181, 0.6)'}
-                        onMouseLeave={(e) => e.target.style.boxShadow = '0 0 20px rgba(0, 173, 181, 0.4)'}
+                        onMouseEnter={(e) => e.target.style.boxShadow = '0 0 30px rgba(0, 173, 181, 0.5)'}
+                        onMouseLeave={(e) => e.target.style.boxShadow = '0 0 20px rgba(0, 173, 181, 0.3)'}
                     >
                         Login
                     </button>
@@ -71,7 +70,7 @@ const Navbar = () => {
 
                 {/* Mobile Menu Button */}
                 <div className="md:hidden">
-                    <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
+                    <button onClick={() => setIsOpen(!isOpen)} className="focus:outline-none" style={{ color: '#0f172a' }}>
                         {isOpen ? <X size={28} /> : <Menu size={28} />}
                     </button>
                 </div>
@@ -79,15 +78,16 @@ const Navbar = () => {
 
             {/* Mobile Menu Overlay */}
             {isOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full border-b p-6 shadow-xl flex flex-col space-y-4" style={{ backgroundColor: '#393E46', borderColor: '#111827' }}>
+                <div className="md:hidden absolute top-full left-0 w-full border-b p-6 shadow-xl flex flex-col space-y-4" style={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0' }}>
                     {navLinks.map((link) => (
                         <a
                             key={link.name}
                             href={link.href}
-                            className="text-white font-medium text-lg transition-colors"
+                            className="font-medium text-lg transition-colors"
+                            style={{ color: '#0f172a' }}
                             onClick={() => setIsOpen(false)}
                             onMouseEnter={(e) => e.target.style.color = '#00ADB5'}
-                            onMouseLeave={(e) => e.target.style.color = '#ffffff'}
+                            onMouseLeave={(e) => e.target.style.color = '#0f172a'}
                         >
                             {link.name}
                         </a>
@@ -97,10 +97,9 @@ const Navbar = () => {
                             setIsOpen(false);
                             handleLoginClick();
                         }}
-                        className="w-full text-center px-6 py-3 font-bold rounded-lg"
+                        className="w-full text-center px-6 py-3 font-bold rounded-lg text-white"
                         style={{
                             background: 'linear-gradient(to right, #00ADB5, #14b8a6)',
-                            color: '#222831'
                         }}
                     >
                         Login
